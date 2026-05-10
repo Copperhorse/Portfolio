@@ -1,163 +1,233 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Portfolio | M. Ahmad Siddiqui</title>
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio | M. Ahmad Siddiqui</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Cookie&display=swap"
+            rel="stylesheet"
+        />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="style.css" />
+    </head>
 
-    <link rel="stylesheet" href="style.css">
-</head>
+    <body>
+        <nav class="navbar">
+            <div class="nav-brand cookie-regular">
+                <a href="#home">Ahmad Siddiqui</a>
+            </div>
 
-<body>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#about">About Me</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
 
-    <nav class="navbar">
-        <div class="nav-brand cookie-regular">
-            <a href="#home">Ahmad Siddiqui</a>
+        <div class="background-wrapper">
+            <div class="frosted-glass">
+                <section id="home">
+                    <p>
+                        Data Scientist with a strong foundation in machine
+                        learning, NLP, and computer vision.
+                    </p>
+                    <p>Living in the plains of Punjab, Pakistan.</p>
+                    <hr />
+                </section>
+
+                <section id="projects">
+                    <h2>Projects</h2>
+
+                    <div class="project-item">
+                        <h3>
+                            <a
+                                href="https://github.com/Copperhorse/profanity_distilbert_lora"
+                                target="_blank"
+                                >Hybrid Profanity Detection & Review Rewriting
+                                System(Sentiment analysis and LLM finetuning)</a
+                            >
+                        </h3>
+                        <ul>
+                            <li>
+                                Fine-tuned DistilBERT with LoRA (1.2% trainable
+                                parameters) for profanity classification at
+                                95.67% accuracy, then applied QLoRA to fine-tune
+                                LFM2.5-1.2B for conditional rewriting of flagged
+                                content documenting the generation collapse that
+                                followed classification fine-tuning as a known
+                                adapter interference phenomenon.
+                            </li>
+                            <li>
+                                Implemented dynamic adapter switching at
+                                inference time to serve the classifier and the
+                                generative rewriter from a single base model,
+                                avoiding the need to load two separate model
+                                weights into memory.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>
+                            <a
+                                href="https://github.com/Copperhorse/PocketLaw"
+                                target="_blank"
+                                >Legal Chatbot Using Retrieval-Augmented
+                                Generation (RAG)</a
+                            >
+                        </h3>
+                        <ul>
+                            <li>
+                                Created a chatbot trained on Pakistani banking
+                                law using a RAG architecture.
+                            </li>
+                            <li>
+                                Applied LoRA for fine-tuning a large language
+                                model, improving legal domain relevance.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>
+                            <a
+                                href="https://github.com/Copperhorse/CurrencyClassification"
+                                target="_blank"
+                                >Currency Classifier for the Visually
+                                Impaired(Computer Vision)</a
+                            >
+                        </h3>
+                        <ul>
+                            <li>
+                                Built a system using transfer learning
+                                (Efficient Net) to classify Pakistani currency
+                                notes.
+                            </li>
+                            <li>
+                                Enabled both real-time image recognition and
+                                audio feedback for usability.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>
+                            <a
+                                href="https://github.com/Copperhorse/edge_iiot"
+                                target="_blank"
+                                >Cyber Attack Detection System (Edge IIoT)</a
+                            >
+                        </h3>
+                        <ul>
+                            <li>
+                                Proposed and implemented a classifier to detect
+                                multiple forms of cyber attacks.
+                            </li>
+                            <li>
+                                Reached 94.67% accuracy using ensemble
+                                techniques.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="project-item">
+                        <h3>
+                            <a
+                                href="https://github.com/Copperhorse/QuestionPrep"
+                                target="_blank"
+                                >QuestionPrep: AI-Based Interview Simulation
+                                Platform (FYP)</a
+                            >
+                        </h3>
+                        <ul>
+                            <li>
+                                Built a three-stage answer evaluation pipeline:
+                                rapidfuzz bidirectional partial-ratio (lexical)
+                                → BGE-small-en bi-encoder (semantic similarity)
+                                → DeBERTa cross-encoder NLI
+                                (entailment/contradiction detection), with a
+                                length-ratio guard that penalises cut-off
+                                answers proportionally and a contradiction
+                                hard-cap that overrides high bi-encoder scores.
+                            </li>
+                            <li>
+                                Deployed TCN-based stress detection entirely in
+                                the browser: an AudioWorklet processor captures
+                                raw PCM into a ring buffer, a Web Worker
+                                computes log-mel spectrograms in pure JS, and
+                                ONNX Runtime Web runs inference with WASM
+                                pre-cached by the service worker for offline
+                                use.
+                            </li>
+                            <li>
+                                Built a RAG ingestion pipeline using Docling OCR
+                                → a mask-unmask MarkdownChunker (preserving
+                                code, math, and table blocks) → ChunkEvaluator →
+                                two-pass LFM2.5-1.2B enrichment (metadata + Q/A
+                                generation) → SimHash deduplication → BGE
+                                embeddings stored in ChromaDB, all orchestrated
+                                through FastAPI background tasks with SSE-based
+                                real-time progress streaming.
+                            </li>
+                        </ul>
+                    </div>
+                    <hr />
+                </section>
+                <section id="skills">
+                    <h2>Skills & Technologies</h2>
+                    <div class="skill-container">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">Machine Learning</span>
+                        <span class="skill-tag">NLP & RAG</span>
+                        <span class="skill-tag">FastAPI</span>
+                        <span class="skill-tag">Polars & DuckDB</span>
+                        <span class="skill-tag">ONNXRuntime</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">uv</span>
+                    </div>
+                    <hr />
+                </section>
+                <section id="about">
+                    <h2>About Me</h2>
+                    <div class="about-content">
+                        <img
+                            src="data/AhmadSiddiquiBlackWhite.webp"
+                            alt="Ahmad Siddiqui"
+                            class="profile-pic"
+                        />
+                        <p>
+                            Currently completing my Bachelor of Science in Data
+                            Science. I am passionate about applying theoretical
+                            knowledge to real-world problems and building
+                            high-performance systems using modern developer
+                            tools.
+                        </p>
+                        <p>
+                            When I'm not optimizing inference pipelines or
+                            developing AI architectures, I enjoy exploring the
+                            culinary arts and classic gaming on Linux
+                            environments.
+                        </p>
+                    </div>
+                    <div style="clear: both"></div>
+                    <hr />
+                </section>
+
+                <section id="contact">
+                    <h2>Contact</h2>
+                    <p>Email: ahmadsiddiqui6127@gmail.com</p>
+                    <p>Phone: +92-3141705233</p>
+
+                    <a href="data/Portfolio-2.pdf" class="btn-download" download
+                        >Download Resume</a
+                    >
+                </section>
+            </div>
         </div>
-
-        <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#projects">Projects</a></li>
-            <li><a href="#about">About Me</a></li>
-            <li><a href="#contact">Contact</a></li>
-        </ul>
-    </nav>
-
-    <div class="background-wrapper">
-
-        <div class="frosted-glass">
-
-            <section id="home">
-                <p>Data Scientist with a strong foundation in machine learning, NLP, and computer vision.</p>
-                <p>Living in the plains of Punjab, Pakistan.</p>
-                <hr>
-            </section>
-
-            <section id="projects">
-                <h2>Projects</h2>
-
-                <div class="project-item">
-                    <h3>
-                        <a href="https://github.com/Copperhorse/profanity_distilbert_lora" target="_blank">Hybrid
-                            Profanity Detection & Review Rewriting System(Sentiment analysis and LLM finetuning)</a>
-                    </h3>
-                    <ul>
-                        <li>Fine-tuned DistilBERT with LoRA (1.2% trainable parameters) for profanity classification at
-                            95.67% accuracy, then applied QLoRA to fine-tune LFM2.5-1.2B for conditional rewriting of
-                            flagged content
-                            documenting the generation collapse that followed classification fine-tuning as a known
-                            adapter interference phenomenon.</li>
-                        <li>Implemented dynamic adapter switching at inference time to serve the classifier and the
-                            generative rewriter from a single base model, avoiding the need to load two separate model
-                            weights into memory.</li>
-                    </ul>
-                </div>
-
-                <div class="project-item">
-                    <h3>
-                        <a href="https://github.com/Copperhorse/PocketLaw" target="_blank">Legal Chatbot Using
-                            Retrieval-Augmented Generation (RAG)</a>
-                    </h3>
-                    <ul>
-                        <li>Created a chatbot trained on Pakistani banking law using a RAG architecture.</li>
-                        <li>Applied LoRA for fine-tuning a large language model, improving legal domain relevance.</li>
-                    </ul>
-                </div>
-
-                <div class="project-item">
-                    <h3>
-                        <a href="https://github.com/Copperhorse/CurrencyClassification" target="_blank">Currency
-                            Classifier for the Visually Impaired(Computer Vision)</a>
-                    </h3>
-                    <ul>
-                        <li>Built a system using transfer learning (Efficient Net) to classify Pakistani currency notes.
-                        </li>
-                        <li>Enabled both real-time image recognition and audio feedback for usability.</li>
-                    </ul>
-                </div>
-
-                <div class="project-item">
-                    <h3>
-                        <a href="https://github.com/Copperhorse/edge_iiot" target="_blank">Cyber Attack Detection System
-                            (Edge IIoT)</a>
-                    </h3>
-                    <ul>
-                        <li>Proposed and implemented a classifier to detect multiple forms of cyber attacks.</li>
-                        <li>Reached 94.67% accuracy using ensemble techniques.</li>
-                    </ul>
-                </div>
-
-                <div class="project-item">
-                    <h3>
-                        <a href="https://github.com/Copperhorse/QuestionPrep" target="_blank">QuestionPrep: AI-Based
-                            Interview Simulation Platform (FYP)</a>
-                    </h3>
-                    <ul>
-                        <li>Built a three-stage answer evaluation pipeline: rapidfuzz bidirectional partial-ratio
-                            (lexical) → BGE-small-en bi-encoder (semantic similarity) → DeBERTa cross-encoder NLI
-                            (entailment/contradiction detection), with a length-ratio guard that penalises cut-off
-                            answers proportionally and a contradiction hard-cap that overrides high bi-encoder scores.
-                        </li>
-                        <li>Deployed TCN-based stress detection entirely in the browser: an AudioWorklet processor
-                            captures raw PCM into a ring buffer, a Web Worker computes log-mel spectrograms in pure JS,
-                            and ONNX Runtime Web runs inference with WASM pre-cached by the service worker for offline
-                            use.
-                        </li>
-                        <li>Built a RAG ingestion pipeline using Docling OCR → a mask-unmask MarkdownChunker (preserving
-                            code, math, and table blocks) → ChunkEvaluator → two-pass LFM2.5-1.2B enrichment (metadata +
-                            Q/A generation) → SimHash deduplication → BGE embeddings stored in ChromaDB, all
-                            orchestrated through FastAPI background tasks with SSE-based real-time progress streaming.
-                        </li>
-                       
-
-                    </ul>
-                </div>
-                <hr>
-            </section>
-            <section id="skills">
-                <h2>Skills & Technologies</h2>
-                <div class="skill-container">
-                    <span class="skill-tag">Python</span>
-                    <span class="skill-tag">Machine Learning</span>
-                    <span class="skill-tag">NLP & RAG</span>
-                    <span class="skill-tag">FastAPI</span>
-                    <span class="skill-tag">Polars & DuckDB</span>
-                    <span class="skill-tag">ONNXRuntime</span>
-                    <span class="skill-tag">Linux</span>
-                    <span class="skill-tag">uv</span>
-                </div>
-                <hr>
-            </section>
-            <section id="about">
-                <h2>About Me</h2>
-                <div class="about-content">
-                    <img src="data/AhmadSiddiquiBlackWhite.webp" alt="Ahmad Siddiqui" class="profile-pic">
-                    <p>Currently completing my Bachelor of Science in Data Science. I am passionate about applying
-                        theoretical knowledge to real-world problems and building high-performance systems using modern
-                        developer tools.</p>
-                    <p>When I'm not optimizing inference pipelines or developing AI architectures, I enjoy exploring the
-                        culinary arts and classic gaming on Linux environments.</p>
-                </div>
-                <div style="clear: both;"></div>
-                <hr>
-            </section>
-
-            <section id="contact">
-                <h2>Contact</h2>
-                <p>Email: ahmadsiddiqui6127@gmail.com</p>
-                <p>Phone: +92-3141705233</p>
-
-                <a href="data/Portfolio-2.pdf" class="btn-download" download>Download Resume</a>
-            </section>
-
-        </div>
-    </div>
-
-</body>
-
+    </body>
 </html>
