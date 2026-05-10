@@ -67,7 +67,7 @@ body, html {
 
 /* --- Background and Layout Styles --- */
 .background-wrapper {
-  background-image: url('data/background.png'); 
+  background-image: url('data/background.webp'); 
   background-size: cover; 
   background-position: center; 
   background-attachment: fixed; 
