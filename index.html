@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -11,24 +11,40 @@
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
         <link
-            href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Lora:ital,wght@0,400;0,500;1,400&family=Inter:wght@300;400;500&family=IBM+Plex+Mono:wght@400;500&display=swap"
+            href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap"
             rel="stylesheet"
         />
         <style>
             :root {
-                --ink: #3a2f22;
-                --ink-light: #6b5a45;
-                --ink-faint: #9c8878;
-                --paper: #f5f1ea;
-                --paper-dark: #ede8df;
-                --paper-mid: #e4ddd2;
-                --accent: #c97f3e;
-                --border: rgba(58, 47, 34, 0.14);
-                --border-mid: rgba(58, 47, 34, 0.22);
+                /* Vesper Dark (default) */
+                --ink: #ffffff;
+                --ink-light: #a0a0a0;
+                --ink-faint: #767676;
+                --paper: #101010;
+                --paper-dark: #181818;
+                --paper-mid: #222222;
+                --accent: #ffc799;
+                --border: #2c2c2c;
+                --border-mid: #3a3a3a;
+                --accent-tint: rgba(255, 199, 153, 0.1);
+            }
+            [data-theme="light"] {
+                /* Vesper Light */
+                --ink: #101010;
+                --ink-light: #767676;
+                --ink-faint: #a0a0a0;
+                --paper: #ffffff;
+                --paper-dark: #f5f5f5;
+                --paper-mid: #eaeaea;
+                --accent: #fb7100;
+                --border: #e0e0e0;
+                --border-mid: #cccccc;
+                --accent-tint: rgba(251, 113, 0, 0.1);
             }
             *,
             *::before,
             *::after {
+                transition: background-color 0.25s ease, color 0.25s ease, border-color 0.25s ease;
                 box-sizing: border-box;
                 margin: 0;
                 padding: 0;
@@ -39,9 +55,12 @@
             body {
                 background-color: var(--paper);
                 color: var(--ink);
-                font-family: "Lora", Georgia, serif;
-                font-size: 16px;
-                line-height: 1.75;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                font-size: 15px;
+                line-height: 1.6;
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
             }
             body::before {
                 content: "";
@@ -49,12 +68,6 @@
                 inset: 0;
                 pointer-events: none;
                 z-index: 0;
-                background-image: repeating-linear-gradient(
-                    to bottom,
-                    transparent,
-                    transparent 27px,
-                    rgba(58, 47, 34, 0.04) 28px
-                );
             }
             .navbar {
                 position: fixed;
@@ -62,42 +75,72 @@
                 left: 0;
                 right: 0;
                 z-index: 1000;
-                background: var(--ink);
+                background: var(--paper-dark);
+                border-bottom: 1px solid var(--border);
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
-                padding: 0 2.5rem;
-                height: 58px;
+                padding: 0 2rem;
+                height: 64px;
             }
             .nav-brand {
-                font-family: "Cormorant Garamond", serif;
-                font-size: 1.55rem;
-                font-weight: 600;
-                font-style: italic;
-                color: var(--paper);
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.95rem;
+                font-weight: 700;
+                letter-spacing: 1px;
+                color: var(--ink);
                 text-decoration: none;
             }
             .nav-brand .dot {
                 color: var(--accent);
-                font-style: normal;
             }
             .nav-links {
                 display: flex;
                 list-style: none;
             }
             .nav-links a {
-                font-family: "Inter", sans-serif;
-                font-size: 0.76rem;
-                font-weight: 400;
-                letter-spacing: 0.1em;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                font-weight: 500;
+                letter-spacing: 1.5px;
                 text-transform: uppercase;
-                color: rgba(245, 241, 234, 0.6);
+                color: var(--ink-light);
                 text-decoration: none;
-                padding: 0.45rem 1rem;
+                padding: 0.45rem 0.9rem;
                 transition: color 0.2s;
             }
             .nav-links a:hover {
-                color: var(--paper);
+                color: var(--accent);
+            }
+            .theme-toggle {
+                display: inline-flex;
+                align-items: center;
+                gap: 7px;
+                background: var(--paper-mid);
+                padding: 6px 14px;
+                border-radius: 999px;
+                border: 1px solid var(--border);
+                cursor: pointer;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                font-weight: 600;
+                letter-spacing: 1px;
+                color: var(--ink);
+                transition: border-color 0.2s;
+            }
+            .theme-toggle:hover {
+                border-color: var(--accent);
+            }
+            .tt-dots {
+                display: flex;
+                gap: 4px;
+                align-items: center;
+            }
+            .tt-dot {
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+                display: inline-block;
             }
             .hamburger {
                 display: none;
@@ -109,7 +152,7 @@
                 display: block;
                 width: 20px;
                 height: 1.5px;
-                background: var(--paper);
+                background: var(--ink);
                 transition:
                     transform 0.3s,
                     opacity 0.3s;
@@ -129,7 +172,7 @@
                 top: 58px;
                 left: 0;
                 right: 0;
-                background: var(--ink);
+                background: var(--paper-dark);
                 padding: 0.8rem 2rem 1.2rem;
                 z-index: 999;
                 flex-direction: column;
@@ -138,11 +181,11 @@
                 display: flex;
             }
             .mobile-menu a {
-                font-family: "Inter", sans-serif;
-                font-size: 0.82rem;
-                letter-spacing: 0.08em;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.78rem;
+                letter-spacing: 1.5px;
                 text-transform: uppercase;
-                color: rgba(245, 241, 234, 0.7);
+                color: var(--ink-light);
                 text-decoration: none;
                 padding: 0.55rem 0;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.05);
@@ -150,120 +193,136 @@
             .page {
                 position: relative;
                 z-index: 1;
-                max-width: 820px;
+                max-width: 1200px;
                 margin: 0 auto;
-                padding: 96px 2.2rem 5rem;
+                padding: 7rem 2rem 5rem;
+                width: 100%;
             }
             .divider {
                 border: none;
-                border-top: 1px solid var(--border-mid);
+                border-top: 1px solid var(--border);
                 margin: 3.5rem 0;
             }
             .eyebrow {
-                font-family: "Inter", sans-serif;
-                font-size: 0.68rem;
-                font-weight: 500;
-                letter-spacing: 0.22em;
+                display: inline-block;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                font-weight: 600;
+                letter-spacing: 1.5px;
                 text-transform: uppercase;
                 color: var(--accent);
-                margin-bottom: 0.3rem;
-                display: block;
+                background: var(--accent-tint);
+                border: 1px solid var(--accent);
+                padding: 0.25rem 0.65rem;
+                border-radius: 3px;
+                margin-bottom: 1.25rem;
             }
             h2.title {
-                font-family: "Cormorant Garamond", serif;
-                font-size: 2.1rem;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.8rem;
                 font-weight: 600;
-                color: var(--ink);
+                letter-spacing: 1.5px;
+                text-transform: uppercase;
+                color: var(--ink-light);
                 margin-bottom: 2rem;
-                line-height: 1.15;
+                border-left: 3px solid var(--accent);
+                padding-left: 0.6rem;
             }
             #home {
-                padding-top: 2.5rem;
+                padding-top: 3rem;
             }
             .hero-name {
-                font-family: "Cormorant Garamond", serif;
-                font-size: clamp(3rem, 8vw, 5rem);
-                font-weight: 700;
-                line-height: 1;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                font-size: clamp(2.5rem, 5vw, 4.2rem);
+                font-weight: 800;
+                letter-spacing: -1.5px;
+                line-height: 1.05;
                 color: var(--ink);
-                margin-bottom: 1.4rem;
+                margin-bottom: 1rem;
             }
             .hero-name em {
-                font-style: italic;
+                font-style: normal;
                 color: var(--accent);
             }
             .hero-tagline {
-                font-family: "Lora", serif;
-                font-size: 1rem;
-                font-style: italic;
+                font-size: 1.05rem;
                 color: var(--ink-light);
-                max-width: 520px;
-                line-height: 1.8;
-                margin-bottom: 0.5rem;
+                max-width: 580px;
+                line-height: 1.6;
+                margin-bottom: 0.4rem;
             }
             .hero-loc {
-                font-family: "Inter", sans-serif;
-                font-size: 0.78rem;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.75rem;
                 color: var(--ink-faint);
-                letter-spacing: 0.05em;
-                margin-bottom: 2.2rem;
+                letter-spacing: 1px;
+                margin-bottom: 2.25rem;
             }
             .ctas {
                 display: flex;
-                gap: 0.9rem;
+                gap: 1rem;
                 flex-wrap: wrap;
+                margin-bottom: 3.5rem;
             }
             .btn {
-                font-family: "Inter", sans-serif;
-                font-size: 0.78rem;
-                font-weight: 500;
-                letter-spacing: 0.09em;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.82rem;
+                font-weight: 700;
+                letter-spacing: 0.5px;
                 text-transform: uppercase;
                 text-decoration: none;
-                padding: 0.6rem 1.5rem;
-                border-radius: 2px;
-                transition: transform 0.15s;
-            }
-            .btn:hover {
-                transform: translateY(-1px);
+                padding: 0.75rem 1.6rem;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: filter 0.15s, border-color 0.15s, background-color 0.15s;
+                display: inline-block;
             }
             .btn-ink {
-                background: var(--ink);
+                background: var(--accent);
                 color: var(--paper);
+                border: none;
             }
             .btn-ink:hover {
-                background: #4e3f2d;
+                filter: brightness(1.1);
             }
             .btn-outline {
-                border: 1px solid var(--border-mid);
+                background: transparent;
+                border: 1px solid var(--border);
                 color: var(--ink);
             }
             .btn-outline:hover {
-                border-color: var(--accent);
-                color: var(--accent);
+                border-color: var(--ink);
+                background: var(--paper-dark);
             }
             .project-card {
-                margin-bottom: 3rem;
-                border-left: 2.5px solid var(--accent);
-                padding-left: 1.4rem;
+                margin-bottom: 1.25rem;
+                background: var(--paper-dark);
+                border: 1px solid var(--border);
+                border-radius: 6px;
+                padding: 1.5rem;
+                transition: border-color 0.2s;
+            }
+            .project-card:hover {
+                border-color: var(--accent);
             }
             .proj-tag {
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.67rem;
-                letter-spacing: 0.08em;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 1px;
                 text-transform: uppercase;
                 color: var(--accent);
                 display: block;
-                margin-bottom: 0.3rem;
+                margin-bottom: 0.4rem;
             }
             .proj-title {
-                font-family: "Cormorant Garamond", serif;
-                font-size: 1.3rem;
-                font-weight: 600;
+                font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+                font-size: 1.15rem;
+                font-weight: 700;
+                letter-spacing: -0.3px;
                 color: var(--ink);
                 text-decoration: none;
                 display: block;
-                margin-bottom: 0.2rem;
+                margin-bottom: 0.25rem;
                 line-height: 1.3;
                 transition: color 0.2s;
             }
@@ -273,19 +332,19 @@
             .proj-gh {
                 display: inline-flex;
                 align-items: center;
-                gap: 0.3rem;
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.7rem;
+                gap: 0.35rem;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
                 color: var(--ink-faint);
                 text-decoration: none;
-                margin-bottom: 0.9rem;
+                margin-bottom: 1rem;
                 transition: color 0.2s;
             }
             .proj-gh:hover {
                 color: var(--accent);
             }
             .diagram-wrap {
-                background: var(--paper-dark);
+                background: var(--paper);
                 border: 1px solid var(--border);
                 border-radius: 4px;
                 padding: 0.9rem 1rem 0.7rem;
@@ -293,9 +352,9 @@
                 overflow-x: auto;
             }
             .diagram-label {
-                font-family: "IBM Plex Mono", monospace;
-                font-size: 0.65rem;
-                letter-spacing: 0.14em;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.68rem;
+                letter-spacing: 1.5px;
                 text-transform: uppercase;
                 color: var(--ink-faint);
                 margin-bottom: 0.5rem;
@@ -310,45 +369,47 @@
                 padding: 0;
             }
             .proj-bullets li {
-                font-family: "Lora", serif;
-                font-size: 0.91rem;
+                font-size: 0.88rem;
                 color: var(--ink-light);
-                line-height: 1.7;
-                margin-bottom: 0.45rem;
+                line-height: 1.6;
+                margin-bottom: 0.5rem;
                 padding-left: 1.1rem;
                 position: relative;
             }
             .proj-bullets li::before {
-                content: "—";
+                content: ">";
                 position: absolute;
                 left: 0;
                 color: var(--accent);
-                font-size: 0.85rem;
+                font-size: 0.8rem;
+                font-family: "JetBrains Mono", monospace;
             }
             .skill-group {
                 margin-bottom: 1.4rem;
             }
             .skill-group-label {
-                font-family: "Inter", sans-serif;
-                font-size: 0.67rem;
-                letter-spacing: 0.16em;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.72rem;
+                letter-spacing: 1.5px;
                 text-transform: uppercase;
-                color: var(--ink-faint);
-                margin-bottom: 0.55rem;
+                color: var(--ink-light);
+                margin-bottom: 0.6rem;
+                border-left: 3px solid var(--accent);
+                padding-left: 0.6rem;
             }
             .skill-tags {
                 display: flex;
                 flex-wrap: wrap;
-                gap: 0.45rem;
+                gap: 0.5rem;
             }
             .skill-tag {
-                font-family: "IBM Plex Mono", monospace;
+                font-family: "JetBrains Mono", monospace;
                 font-size: 0.75rem;
                 color: var(--ink);
-                background: var(--paper-mid);
+                background: var(--paper-dark);
                 border: 1px solid var(--border);
-                padding: 0.3rem 0.7rem;
-                border-radius: 2px;
+                padding: 0.35rem 0.75rem;
+                border-radius: 4px;
                 transition:
                     border-color 0.2s,
                     color 0.2s;
@@ -359,23 +420,24 @@
             }
             .about-grid {
                 display: grid;
-                grid-template-columns: 120px 1fr;
+                grid-template-columns: 140px 1fr;
                 gap: 2rem;
                 align-items: start;
             }
             .profile-pic {
-                width: 120px;
-                height: 120px;
-                border-radius: 50%;
+                width: 140px;
+                height: 140px;
+                border-radius: 6px;
                 object-fit: cover;
-                border: 2px solid var(--border-mid);
-                filter: sepia(15%) contrast(0.95);
+                border: 1px solid var(--border);
+                filter: grayscale(20%) contrast(1.02);
             }
             .about-text p {
-                font-size: 0.93rem;
+                font-size: 0.95rem;
                 color: var(--ink-light);
                 margin-bottom: 0.8rem;
-                line-height: 1.8;
+                line-height: 1.7;
+                max-width: 640px;
             }
             .contact-list {
                 list-style: none;
@@ -383,9 +445,9 @@
                 margin-bottom: 1.8rem;
             }
             .contact-list li {
-                font-family: "Inter", sans-serif;
-                font-size: 0.88rem;
-                margin-bottom: 0.6rem;
+                font-family: "JetBrains Mono", monospace;
+                font-size: 0.85rem;
+                margin-bottom: 0.7rem;
                 color: var(--ink-light);
             }
             .contact-list a {
@@ -402,26 +464,27 @@
                 border-color: var(--accent);
             }
             .cl {
-                font-size: 0.67rem;
-                letter-spacing: 0.14em;
+                font-size: 0.68rem;
+                letter-spacing: 1.5px;
                 text-transform: uppercase;
                 color: var(--ink-faint);
-                margin-right: 0.5rem;
+                margin-right: 0.6rem;
             }
             footer {
                 text-align: center;
-                padding: 2rem;
-                font-family: "Inter", sans-serif;
+                padding: 1.5rem;
+                font-family: "JetBrains Mono", monospace;
                 font-size: 0.72rem;
+                letter-spacing: 1px;
                 color: var(--ink-faint);
                 border-top: 1px solid var(--border);
-                margin-top: 2rem;
+                margin-top: auto;
                 position: relative;
                 z-index: 1;
             }
-            @media (max-width: 600px) {
+            @media (max-width: 768px) {
                 .navbar {
-                    padding: 0 1.2rem;
+                    padding: 0 1.25rem;
                 }
                 .nav-links {
                     display: none;
@@ -430,10 +493,11 @@
                     display: flex;
                 }
                 .page {
-                    padding: 78px 1.2rem 3rem;
+                    padding: 6rem 1.25rem 3rem;
                 }
                 .hero-name {
-                    font-size: 2.8rem;
+                    font-size: 2.2rem;
+                    letter-spacing: -1px;
                 }
                 .about-grid {
                     grid-template-columns: 1fr;
@@ -453,9 +517,19 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
+            <div style="display:flex;align-items:center;gap:0.8rem;">
+            <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">
+                <span class="tt-dots">
+                    <span class="tt-dot" style="background:var(--accent);"></span>
+                    <span class="tt-dot" style="background:var(--ink-light);"></span>
+                    <span class="tt-dot" style="background:var(--ink);"></span>
+                </span>
+                <span id="themeLabel">LIGHT</span>
+            </button>
             <div class="hamburger" id="hbg" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
+        </div>
         </nav>
 
         <div class="mobile-menu" id="mob">
@@ -478,7 +552,7 @@
                 <div class="ctas">
                     <a href="#projects" class="btn btn-ink">View Projects</a>
                     <a
-                        href="data/Portfolio-4.pdf"
+                        href="data/Portfolio-2-1.pdf"
                         class="btn btn-outline"
                         download
                         >Download Resume</a
@@ -546,7 +620,7 @@
                                 >
                                     <polygon
                                         points="0 0,6 3,0 6"
-                                        fill="#c97f3e"
+                                        fill="var(--accent)"
                                     />
                                 </marker>
                             </defs>
@@ -556,8 +630,8 @@
                                 width="100"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -566,8 +640,8 @@
                                 width="105"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -576,8 +650,8 @@
                                 width="100"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -586,8 +660,8 @@
                                 width="110"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <rect
@@ -596,8 +670,8 @@
                                 width="100"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -606,8 +680,8 @@
                                 width="100"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -615,9 +689,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Docling OCR
                             </text>
@@ -626,8 +700,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 parse
                             </text>
@@ -636,9 +710,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 MD Chunker
                             </text>
@@ -647,8 +721,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 mask-unmask
                             </text>
@@ -657,9 +731,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 ChunkEval
                             </text>
@@ -668,8 +742,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 filter
                             </text>
@@ -678,9 +752,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 LFM2.5-1.2B
                             </text>
@@ -689,8 +763,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 metadata + Q/A
                             </text>
@@ -699,9 +773,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 SimHash
                             </text>
@@ -710,8 +784,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 dedup
                             </text>
@@ -720,9 +794,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 BGE+Chroma
                             </text>
@@ -731,8 +805,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 store
                             </text>
@@ -741,7 +815,7 @@
                                 y1="25"
                                 x2="119"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a1)"
                             />
@@ -750,7 +824,7 @@
                                 y1="25"
                                 x2="245"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a1)"
                             />
@@ -759,7 +833,7 @@
                                 y1="25"
                                 x2="366"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a1)"
                             />
@@ -768,7 +842,7 @@
                                 y1="25"
                                 x2="497"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a1)"
                             />
@@ -777,7 +851,7 @@
                                 y1="25"
                                 x2="618"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a1)"
                             />
@@ -801,7 +875,7 @@
                                 >
                                     <polygon
                                         points="0 0,6 3,0 6"
-                                        fill="#c97f3e"
+                                        fill="var(--accent)"
                                     />
                                 </marker>
                             </defs>
@@ -811,8 +885,8 @@
                                 width="115"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -821,8 +895,8 @@
                                 width="130"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -831,8 +905,8 @@
                                 width="135"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -841,8 +915,8 @@
                                 width="130"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <rect
@@ -851,8 +925,8 @@
                                 width="110"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -860,9 +934,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 User Answer
                             </text>
@@ -871,8 +945,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 + reference
                             </text>
@@ -881,9 +955,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 rapidfuzz
                             </text>
@@ -892,8 +966,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 lexical score
                             </text>
@@ -902,9 +976,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 BGE bi-encoder
                             </text>
@@ -913,8 +987,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 semantic score
                             </text>
@@ -923,9 +997,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 DeBERTa NLI
                             </text>
@@ -934,8 +1008,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 entailment check
                             </text>
@@ -944,9 +1018,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Final Score
                             </text>
@@ -955,8 +1029,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 + length guard
                             </text>
@@ -965,7 +1039,7 @@
                                 y1="25"
                                 x2="132"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a2)"
                             />
@@ -974,7 +1048,7 @@
                                 y1="25"
                                 x2="281"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a2)"
                             />
@@ -983,7 +1057,7 @@
                                 y1="25"
                                 x2="435"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a2)"
                             />
@@ -992,7 +1066,7 @@
                                 y1="25"
                                 x2="584"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#a2)"
                             />
@@ -1076,7 +1150,7 @@
                                 >
                                     <polygon
                                         points="0 0,6 3,0 6"
-                                        fill="#c97f3e"
+                                        fill="var(--accent)"
                                     />
                                 </marker>
                                 <marker
@@ -1089,7 +1163,7 @@
                                 >
                                     <polygon
                                         points="0 0,6 3,0 6"
-                                        fill="#9c8878"
+                                        fill="var(--ink-faint)"
                                     />
                                 </marker>
                             </defs>
@@ -1100,8 +1174,8 @@
                                 width="100"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -1109,9 +1183,9 @@
                                 y="52"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Input
                             </text>
@@ -1120,8 +1194,8 @@
                                 y="64"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 review text
                             </text>
@@ -1132,8 +1206,8 @@
                                 width="130"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <text
@@ -1141,9 +1215,9 @@
                                 y="52"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 DistilBERT+LoRA
                             </text>
@@ -1152,8 +1226,8 @@
                                 y="64"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 classify (95.67%)
                             </text>
@@ -1162,7 +1236,7 @@
                                 y1="55"
                                 x2="118"
                                 y2="55"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#b1)"
                             />
@@ -1172,7 +1246,7 @@
                                 y1="47"
                                 x2="300"
                                 y2="18"
-                                stroke="#9c8878"
+                                stroke="var(--ink-faint)"
                                 stroke-width="1"
                                 marker-end="url(#b2)"
                             />
@@ -1182,8 +1256,8 @@
                                 width="95"
                                 height="30"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <text
@@ -1191,9 +1265,9 @@
                                 y="16"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Clean
                             </text>
@@ -1202,8 +1276,8 @@
                                 y="27"
                                 text-anchor="middle"
                                 font-size="7"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 pass through
                             </text>
@@ -1213,7 +1287,7 @@
                                 y1="63"
                                 x2="300"
                                 y2="91"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#b1)"
                             />
@@ -1223,8 +1297,8 @@
                                 width="95"
                                 height="30"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -1232,9 +1306,9 @@
                                 y="88"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Flagged
                             </text>
@@ -1243,8 +1317,8 @@
                                 y="99"
                                 text-anchor="middle"
                                 font-size="7"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 needs rewrite
                             </text>
@@ -1254,7 +1328,7 @@
                                 y1="91"
                                 x2="428"
                                 y2="91"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#b1)"
                             />
@@ -1264,8 +1338,8 @@
                                 width="118"
                                 height="30"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -1273,9 +1347,9 @@
                                 y="88"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Adapter Switch
                             </text>
@@ -1284,8 +1358,8 @@
                                 y="99"
                                 text-anchor="middle"
                                 font-size="7"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 load QLoRA adapter
                             </text>
@@ -1295,7 +1369,7 @@
                                 y1="91"
                                 x2="578"
                                 y2="91"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#b1)"
                             />
@@ -1305,8 +1379,8 @@
                                 width="112"
                                 height="30"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <text
@@ -1314,9 +1388,9 @@
                                 y="88"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 QLoRA Rewriter
                             </text>
@@ -1325,8 +1399,8 @@
                                 y="99"
                                 text-anchor="middle"
                                 font-size="7"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 LFM2.5-1.2B
                             </text>
@@ -1337,8 +1411,8 @@
                                 width="58"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -1346,9 +1420,9 @@
                                 y="52"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Output
                             </text>
@@ -1357,8 +1431,8 @@
                                 y="64"
                                 text-anchor="middle"
                                 font-size="7"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 clean
                             </text>
@@ -1368,7 +1442,7 @@
                                 y1="19"
                                 x2="729"
                                 y2="19"
-                                stroke="#9c8878"
+                                stroke="var(--ink-faint)"
                                 stroke-width="1"
                                 stroke-dasharray="3,2"
                             />
@@ -1377,7 +1451,7 @@
                                 y1="19"
                                 x2="729"
                                 y2="34"
-                                stroke="#9c8878"
+                                stroke="var(--ink-faint)"
                                 stroke-width="1"
                                 marker-end="url(#b2)"
                             />
@@ -1387,7 +1461,7 @@
                                 y1="91"
                                 x2="729"
                                 y2="91"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1"
                                 stroke-dasharray="3,2"
                             />
@@ -1396,7 +1470,7 @@
                                 y1="91"
                                 x2="729"
                                 y2="76"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#b1)"
                             />
@@ -1454,7 +1528,7 @@
                             />
                         </svg>
                         github.com/Copperhorse/PocketLaw
-                    </a>e
+                    </a>
                     <div class="diagram-wrap">
                         <div class="diagram-label">RAG Query Flow</div>
                         <svg
@@ -1473,7 +1547,7 @@
                                 >
                                     <polygon
                                         points="0 0,6 3,0 6"
-                                        fill="#c97f3e"
+                                        fill="var(--accent)"
                                     />
                                 </marker>
                             </defs>
@@ -1483,8 +1557,8 @@
                                 width="110"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <rect
@@ -1493,8 +1567,8 @@
                                 width="110"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -1503,8 +1577,8 @@
                                 width="115"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -1513,8 +1587,8 @@
                                 width="110"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -1523,8 +1597,8 @@
                                 width="135"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -1532,9 +1606,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 User Query
                             </text>
@@ -1543,8 +1617,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 legal question
                             </text>
@@ -1553,9 +1627,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Embed
                             </text>
@@ -1564,8 +1638,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 dense vector
                             </text>
@@ -1574,9 +1648,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Vector Search
                             </text>
@@ -1585,8 +1659,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 top-k chunks
                             </text>
@@ -1595,9 +1669,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 LoRA LLM
                             </text>
@@ -1606,8 +1680,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 fine-tuned
                             </text>
@@ -1616,9 +1690,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Grounded Answer
                             </text>
@@ -1627,8 +1701,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 banking law
                             </text>
@@ -1637,7 +1711,7 @@
                                 y1="25"
                                 x2="127"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#c1)"
                             />
@@ -1646,7 +1720,7 @@
                                 y1="25"
                                 x2="256"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#c1)"
                             />
@@ -1655,7 +1729,7 @@
                                 y1="25"
                                 x2="390"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#c1)"
                             />
@@ -1664,7 +1738,7 @@
                                 y1="25"
                                 x2="519"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#c1)"
                             />
@@ -1733,7 +1807,7 @@
                                 >
                                     <polygon
                                         points="0 0,6 3,0 6"
-                                        fill="#c97f3e"
+                                        fill="var(--accent)"
                                     />
                                 </marker>
                             </defs>
@@ -1743,8 +1817,8 @@
                                 width="95"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <rect
@@ -1753,8 +1827,8 @@
                                 width="135"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -1763,8 +1837,8 @@
                                 width="130"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -1773,8 +1847,8 @@
                                 width="125"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -1783,8 +1857,8 @@
                                 width="95"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -1792,9 +1866,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Camera
                             </text>
@@ -1803,8 +1877,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 live frame
                             </text>
@@ -1813,9 +1887,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 EfficientNet-B0
                             </text>
@@ -1824,8 +1898,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 transfer learning
                             </text>
@@ -1834,9 +1908,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 PKR Note Class
                             </text>
@@ -1845,8 +1919,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 10/20/50/100...
                             </text>
@@ -1855,9 +1929,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Confidence Gate
                             </text>
@@ -1866,8 +1940,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 threshold filter
                             </text>
@@ -1876,9 +1950,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Audio TTS
                             </text>
@@ -1887,8 +1961,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 feedback
                             </text>
@@ -1897,7 +1971,7 @@
                                 y1="25"
                                 x2="112"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#d1)"
                             />
@@ -1906,7 +1980,7 @@
                                 y1="25"
                                 x2="266"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#d1)"
                             />
@@ -1915,7 +1989,7 @@
                                 y1="25"
                                 x2="415"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#d1)"
                             />
@@ -1924,7 +1998,7 @@
                                 y1="25"
                                 x2="559"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#d1)"
                             />
@@ -1993,7 +2067,7 @@
                                 >
                                     <polygon
                                         points="0 0,6 3,0 6"
-                                        fill="#c97f3e"
+                                        fill="var(--accent)"
                                     />
                                 </marker>
                             </defs>
@@ -2003,8 +2077,8 @@
                                 width="110"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <rect
@@ -2013,8 +2087,8 @@
                                 width="115"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -2023,8 +2097,8 @@
                                 width="130"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -2033,8 +2107,8 @@
                                 width="130"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#d4b896"
+                                fill="var(--paper-dark)"
+                                stroke="var(--border)"
                                 stroke-width="1"
                             />
                             <rect
@@ -2043,8 +2117,8 @@
                                 width="95"
                                 height="38"
                                 rx="3"
-                                fill="#ede8df"
-                                stroke="#c97f3e"
+                                fill="var(--paper-dark)"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                             />
                             <text
@@ -2052,9 +2126,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 IIoT Traffic
                             </text>
@@ -2063,8 +2137,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 network flows
                             </text>
@@ -2073,9 +2147,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Feature Eng.
                             </text>
@@ -2084,8 +2158,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 flow statistics
                             </text>
@@ -2094,9 +2168,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Ensemble Model
                             </text>
@@ -2105,8 +2179,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 RF + XGB
                             </text>
@@ -2115,9 +2189,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Attack Class
                             </text>
@@ -2126,8 +2200,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 DDoS / MITM / ...
                             </text>
@@ -2136,9 +2210,9 @@
                                 y="22"
                                 text-anchor="middle"
                                 font-size="8"
-                                fill="#3a2f22"
+                                fill="var(--ink)"
                                 font-weight="600"
-                                font-family="IBM Plex Mono,monospace"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 Alert
                             </text>
@@ -2147,8 +2221,8 @@
                                 y="34"
                                 text-anchor="middle"
                                 font-size="7.5"
-                                fill="#6b5a45"
-                                font-family="IBM Plex Mono,monospace"
+                                fill="var(--ink-light)"
+                                font-family="JetBrains Mono,monospace"
                             >
                                 94.67% acc.
                             </text>
@@ -2157,7 +2231,7 @@
                                 y1="25"
                                 x2="127"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#e1)"
                             />
@@ -2166,7 +2240,7 @@
                                 y1="25"
                                 x2="261"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#e1)"
                             />
@@ -2175,7 +2249,7 @@
                                 y1="25"
                                 x2="410"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#e1)"
                             />
@@ -2184,7 +2258,7 @@
                                 y1="25"
                                 x2="559"
                                 y2="25"
-                                stroke="#c97f3e"
+                                stroke="var(--accent)"
                                 stroke-width="1.2"
                                 marker-end="url(#e1)"
                             />
@@ -2321,6 +2395,13 @@
         </footer>
 
         <script>
+            function toggleTheme() {
+                var root = document.documentElement;
+                var label = document.getElementById("themeLabel");
+                var isDark = root.getAttribute("data-theme") === "dark";
+                root.setAttribute("data-theme", isDark ? "light" : "dark");
+                label.textContent = isDark ? "DARK" : "LIGHT";
+            }
             function toggleMenu() {
                 document.getElementById("mob").classList.toggle("open");
                 document.getElementById("hbg").classList.toggle("open");
