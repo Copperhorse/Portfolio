@@ -10,7 +10,7 @@ PROFILE = {
     "role": "Machine learning engineer",
     "lead": "I build and measure ML systems that run on small hardware: local LLMs, RAG that has to quote its sources, and on-device vision and speech.",
     "lead_em": "local LLMs",
-    "where": "BS Data Science, KFUEIT · ML Engineer (contract) at Rezinx since Aug 2025 · Rahim Yar Khan, Pakistan",
+    "where": "BS Data Science graduate, KFUEIT 2026 · ML Engineer (contract) at Rezinx since Aug 2025 · Rahim Yar Khan, Pakistan",
     "email": "ahmadsiddiqui6127@gmail.com",
     "github": "https://github.com/Copperhorse",
     "linkedin": "https://www.linkedin.com/in/ahmad-siddiqui-559998267",
@@ -153,8 +153,8 @@ EXPERIENCE = [
          "Prepared data and engineered features to improve model accuracy.",
          "Ran experiments to evaluate models and recommended adjustments.",
      ]},
-    {"when": "Jun – Jul 2026", "place": "Lahore", "role": "Intern", "org": "Ittehad Chemicals",
-     "bullets": ["Supported production and inventory processes while following plant safety protocols."]},
+    {"when": "Jun – Jul 2026", "place": "Lahore", "role": "Network Administration Intern", "org": "Ittehad Chemicals",
+     "bullets": ["Worked on network administration tasks covering microwave WAN links, OSPF routing, Cisco and MikroTik equipment, and Windows Server Active Directory."]},
 ]
 
 SKILLS = [
@@ -166,6 +166,6 @@ SKILLS = [
 
 ABOUT = [
     "I like ML work where the interesting part is finding out what actually works. My projects report what failed next to what succeeded, because that is the part another engineer needs.",
-    "<strong>Education:</strong> BS Data Science, Khwaja Fareed University of Engineering and Information Technology (KFUEIT), 2022 – 2026, CGPA 3.35 / 4.00.",
+    "<strong>Education:</strong> BS Data Science graduate, Khwaja Fareed University of Engineering and Information Technology (KFUEIT), 2022 – 2026, CGPA 3.35 / 4.00.",
     "Away from a keyboard I read mythology and work through logic puzzles.",
 ]

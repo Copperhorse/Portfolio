@@ -19,3 +19,11 @@ for tpl in sorted((here / "templates").glob("*.html.j2")):
     )
     (here / f"{name}.html").write_text(html, encoding="utf-8")
     print("wrote", f"designs/{name}.html", f"({len(html):,} bytes)")
+
+# The live site is the Bento design: render it to ../index.html with asset paths made root-relative.
+site = env.get_template("bento.html.j2").render(
+    P=content.PROFILE, PROJECTS=content.PROJECTS, ALSO=content.ALSO,
+    EXPERIENCE=content.EXPERIENCE, SKILLS=content.SKILLS, ABOUT=content.ABOUT,
+).replace('"../data/', '"data/')
+(here.parent / "index.html").write_text(site, encoding="utf-8")
+print("wrote index.html (live site, bento)", f"({len(site):,} bytes)")

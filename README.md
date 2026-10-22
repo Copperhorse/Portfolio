@@ -3,7 +3,7 @@
 Single-page portfolio for M. Ahmad Siddiqui: plain HTML and CSS, no build step.
 
 - `index.html`: the site. Images live in `data/`.
-- `resume/resume.html`: resume source. `python resume/build.py` renders it to `data/Ahmad_Siddiqui_Resume.pdf` (needs `playwright` with Chromium).
+- `resume/resume.html`: resume source. `python resume/build.py` renders it to `data/Ahmad_Siddiqui_Resume.pdf` and a copy at `data/Resume.pdf` (the older, shared URL). Needs `playwright` with Chromium.
 - `resume/resume.tex`: the same resume for Overleaf.
 - `designs/`: the same content in several designs (Paper, Terminal, Editorial, Bento), kept as references for future sites.
   `designs/index.html` compares them; `python designs/build.py` regenerates the pages from `designs/content.py`

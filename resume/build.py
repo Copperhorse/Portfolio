@@ -12,4 +12,6 @@ with sync_playwright() as p:
     page.goto((here / "resume.html").as_uri())
     page.pdf(path=str(out), prefer_css_page_size=True, print_background=True)
     browser.close()
-print("wrote", out)
+import shutil
+shutil.copy(out, out.with_name("Resume.pdf"))  # keeps the old, shared URL working
+print("wrote", out, "and", out.with_name("Resume.pdf"))
