@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>M. Ahmad Siddiqui - Resume</title>
+<style>
+  @page { size: Letter; margin: 0.35in 0.45in; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: "Liberation Sans", Arial, Helvetica, sans-serif; font-size: 9pt; line-height: 1.25; color: #000; }
+  a { color: #000; text-decoration: none; }
+  header { text-align: center; margin-bottom: 4pt; }
+  h1 { font-size: 18pt; letter-spacing: 0.2pt; font-weight: 700; line-height: 1.1; }
+  .contact { font-size: 8.6pt; margin-top: 2pt; }
+  .contact span + span::before { content: " | "; }
+  h2 { font-size: 9.6pt; text-transform: uppercase; font-weight: 700; letter-spacing: 0.6pt; border-bottom: 0.7pt solid #000; margin: 5pt 0 2.5pt; padding-bottom: 0.5pt; }
+  .row { display: flex; justify-content: space-between; align-items: baseline; gap: 8pt; }
+  .row b { font-weight: 700; }
+  .row i, .row .r { font-style: italic; font-size: 8.8pt; white-space: nowrap; }
+  .entry { margin-bottom: 2.5pt; }
+  .sub { font-style: italic; font-size: 8.8pt; }
+  ul { margin: 1pt 0 0 12pt; }
+  li { margin-bottom: 0.6pt; padding-left: 1pt; }
+  p.summary { text-align: left; }
+  .skills p { margin-bottom: 1.2pt; }
+  .skills b { font-weight: 700; }
+</style>
+</head>
+<body>
+<header>
+  <h1>M. Ahmad Siddiqui</h1>
+  <div class="contact">
+    <span>Rahim Yar Khan, Punjab, Pakistan</span><span>+92-3141706233</span><span><a href="mailto:ahmadsiddiqui6127@gmail.com">ahmadsiddiqui6127@gmail.com</a></span><span><a href="https://www.linkedin.com/in/ahmad-siddiqui-559998267/">linkedin.com/in/ahmad-siddiqui-559998267</a></span><span><a href="https://github.com/Copperhorse">github.com/Copperhorse</a></span><span><a href="https://copperhorse.github.io/Portfolio/">copperhorse.github.io/Portfolio</a></span>
+  </div>
+</header>
+
+<h2>Professional Summary</h2>
+<p class="summary">ML engineer (BS Data Science) who builds and evaluates LLM, RAG, speech and computer-vision systems that run on local hardware. Experience fine-tuning models with LoRA and QLoRA, building retrieval pipelines that verify their own answers, and deploying on-device inference with ONNX Runtime and llama.cpp. Reports results with held-out test sets, confidence intervals and documented failures.</p>
+
+<h2>Experience</h2>
+<div class="entry">
+  <div class="row"><b>Rezinx</b><span class="r">Remote</span></div>
+  <div class="row"><span class="sub">ML Engineer (contract)</span><span class="r">Aug 2025 – Present</span></div>
+  <ul>
+    <li>Fine-tuned language models with LoRA for downstream production use cases.</li>
+    <li>Built a recommendation engine with Superlinked and evaluated several embedding models for a job-classification task.</li>
+    <li>Built a computer-vision hazard detector for fire, knives and stairs that estimates how close each one is to a child.</li>
+    <li>Built a Grafana dashboard for monitoring models and systems.</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="row"><b>Arch Technologies</b><span class="r">Islamabad, Pakistan (Remote)</span></div>
+  <div class="row"><span class="sub">Machine Learning Intern</span><span class="r">May 2025 – Jun 2025</span></div>
+  <ul>
+    <li>Built machine learning models to find patterns in large datasets, with data preprocessing and feature engineering to improve accuracy.</li>
+    <li>Ran experiments to evaluate model effectiveness and recommended adjustments.</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="row"><b>Ittehad Chemicals</b><span class="r">Lahore, Punjab, Pakistan</span></div>
+  <div class="row"><span class="sub">Intern</span><span class="r">Jun 2026 – Jul 2026</span></div>
+  <ul>
+    <li>Supported production and inventory processes while following plant safety protocols.</li>
+  </ul>
+</div>
+
+<h2>Projects</h2>
+<div class="entry">
+  <div class="row"><b><a href="https://github.com/Copperhorse/PictureBOOK">PictureBOOK: offline picture-book generator</a></b><span class="r">Rust, Tauri, SvelteKit, FastAPI</span></div>
+  <ul>
+    <li>Built a desktop app that turns a typed or spoken story into an illustrated PDF in 6 to 9 minutes, running Whisper, Gemma 4 E4B and FLUX.2 klein in turn on one 8 GB GPU. Each model stage is an isolated, memory-capped process (tested: no stray process after SIGKILL).</li>
+    <li>Benchmarked every stage (Whisper 1.9% WER on 48 synthetic clips; vision critic 94.7% accuracy on 40 synthetic images) and documented failures: no model detected extra limbs and 11 of 13 flagged defects survived redraws, so a human reviews every page. 156 Python tests.</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="row"><b><a href="https://github.com/Copperhorse/Template_RAG">Template_RAG: RAG library for documents and source code</a></b><span class="r">Python, SQLite FTS5, Streamlit</span></div>
+  <ul>
+    <li>Built hybrid retrieval (dense + BM25 + reciprocal rank fusion + listwise reranker), AST-based code chunking, and answer gates that require every quote to be found verbatim in the chunk it cites. 513 tests and CI.</li>
+    <li>Evaluated on frozen gold sets with bootstrap confidence intervals and paired tests: the reranker added +18.6 recall@1 on 70 hand-written queries, while a web-trained cross-encoder never helped.</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="row"><b><a href="https://github.com/Copperhorse/DLRAG">DLRAG: pre-registered comparison of RAG and tool-using agents</a></b><span class="r">Python, llama.cpp</span></div>
+  <ul>
+    <li>Designed 56 execution-graded coding tasks (24 frozen for the final test, sha256 manifest) and compared six retrieval and agent setups on a 2B model with paired bootstrap confidence intervals.</li>
+    <li>Found that retrieval raised the full-pass rate from 3.3% to 33.3%, while tool-using agents added no detectable gain (-1.7 points, 95% CI -10.8 to +6.7) at about 3x the tokens.</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="row"><b><a href="https://github.com/Copperhorse/QuestionPrep">QuestionPrep: AI interview practice platform (final-year project)</a></b><span class="r">FastAPI, ChromaDB, llama.cpp</span></div>
+  <ul>
+    <li>Built a local platform that generates interview questions from PDFs with grounding checks and scores answers in three stages (fuzzy match, BGE bi-encoder, DeBERTa NLI), with adaptive difficulty, token auth and SSE. 460 tests and CI.</li>
+    <li>Implemented in-browser stress detection: a TCN on ONNX Runtime Web with a hand-written FFT, mel-filterbank and DCT-II front end, with no server round-trip.</li>
+  </ul>
+</div>
+<div class="entry">
+  <div class="row"><b>Other projects</b><span class="r"></span></div>
+  <ul>
+    <li><a href="https://github.com/Copperhorse/profanity_distilbert_lora">Hybrid profanity detection and rewriting</a>: LoRA-tuned DistilBERT (95.67% accuracy) routing to a QLoRA-tuned LFM2.5-1.2B rewriter via adapter switching. <a href="https://github.com/Copperhorse/edge_iiot">Edge-IIoT attack detection</a>: multi-class intrusion classifier, 94.67% accuracy. <a href="https://github.com/Copperhorse/PocketLaw">PocketLaw</a>: RAG chatbot over Pakistani banking law. <a href="https://github.com/Copperhorse/CurrencyClassification">Currency classifier</a>: EfficientNet-B0 with text-to-speech for visually impaired users.</li>
+  </ul>
+</div>
+
+<h2>Education</h2>
+<div class="row"><b>Khwaja Fareed University of Engineering and Information Technology</b><span class="r">Aug 2022 – May 2026</span></div>
+<div class="sub">Bachelor of Science in Data Science | CGPA: 3.35/4.00</div>
+
+<h2>Skills</h2>
+<div class="skills">
+  <p><b>ML &amp; Deep Learning:</b> Python, SQL, PyTorch, scikit-learn, XGBoost, Hugging Face Transformers, LoRA, QLoRA, LLM fine-tuning, ONNX Runtime, llama.cpp</p>
+  <p><b>NLP &amp; Retrieval:</b> RAG, hybrid search (BM25 + dense), reranking, embeddings, ChromaDB, NLI, Docling, evaluation (recall@k, MRR, bootstrap confidence intervals)</p>
+  <p><b>Vision &amp; Speech:</b> YOLOv8, EfficientNet, transfer learning, object detection, OpenCV, Whisper</p>
+  <p><b>Backend &amp; Tools:</b> FastAPI, REST APIs, SQLite, Docker, Grafana, Superlinked, Git, pytest, GitHub Actions, Linux, Bash, uv</p>
+</div>
+</body>
+</html>

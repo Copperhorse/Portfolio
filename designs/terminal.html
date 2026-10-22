@@ -1,0 +1,352 @@
+<!doctype html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>M. Ahmad Siddiqui | ML Engineer</title>
+<meta name="description" content="M. Ahmad Siddiqui, ML engineer. Local LLMs, RAG that quotes its sources, and on-device vision and speech, with measured results." />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="M. Ahmad Siddiqui | ML Engineer" />
+<script>
+    /* Theme before first paint: saved choice, else the system setting, else the design's default. */
+    (function () {
+        var t = "dark";
+        try {
+            var s = localStorage.getItem("theme");
+            if (s === "light" || s === "dark") t = s;
+            else if (window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+            else if (window.matchMedia("(prefers-color-scheme: light)").matches) t = "light";
+        } catch (e) {}
+        document.documentElement.setAttribute("data-theme", t);
+    })();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<meta name="theme-color" content="#0d1117" />
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&display=swap" rel="stylesheet" />
+<style>
+    :root {
+        --bg: #0d1117; --bar: #161b22; --fg: #d0d7de; --dim: #8b949e; --line: #30363d;
+        --green: #3fb950; --cyan: #79c0ff; --amber: #e3b341; --red: #ff7b72; --purple: #d2a8ff;
+        --sel: rgba(121,192,255,.14);
+        --mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+    }
+    [data-theme="light"] {
+        --bg: #fbf7ee; --bar: #efe9da; --fg: #33404a; --dim: #66737c; --line: #d6cfbd;
+        --green: #1a7f37; --cyan: #0b5fb8; --amber: #8a5a00; --red: #c2312a; --purple: #7a42c4;
+        --sel: rgba(11,95,184,.1);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 4rem; }
+    body { background: var(--bg); color: var(--fg); font: 400 15px/1.75 var(--mono); transition: background-color .25s, color .25s; }
+    a { color: var(--cyan); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 3px; }
+    :focus-visible { outline: 2px solid var(--amber); outline-offset: 3px; }
+    ::selection { background: var(--sel); }
+    strong { color: var(--fg); font-weight: 700; }
+
+    .bar { position: fixed; inset: 0 0 auto 0; z-index: 50; background: var(--bar); border-bottom: 1px solid var(--line); }
+    .bar-in { max-width: 920px; margin: 0 auto; padding: 0 1.25rem; height: 2.9rem; display: flex; align-items: center; gap: 1rem; }
+    .dots { display: flex; gap: .4rem; }
+    .dots i { width: .72rem; height: .72rem; border-radius: 50%; display: block; }
+    .dots i:nth-child(1) { background: #ff5f56; } .dots i:nth-child(2) { background: #ffbd2e; } .dots i:nth-child(3) { background: #27c93f; }
+    .title { color: var(--dim); font-size: .78rem; margin-right: auto; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tabs { display: flex; gap: 1rem; font-size: .76rem; }
+    .tabs a { color: var(--dim); }
+    .tabs a:hover { color: var(--fg); text-decoration: none; }
+    .tabs a[aria-current="true"] { color: var(--green); }
+    .tbtn { background: none; border: 1px solid var(--line); color: var(--dim); font: inherit; font-size: .72rem; padding: .2rem .55rem; cursor: pointer; }
+    .tbtn:hover { color: var(--fg); }
+
+    main { max-width: 920px; margin: 0 auto; padding: 5.2rem 1.25rem 4rem; }
+    section { margin-bottom: 3.6rem; }
+    .cmd { margin: 0 0 .7rem; font-weight: 500; }
+    .ps { color: var(--green); font-weight: 700; }
+    .path { color: var(--cyan); }
+    .dol { color: var(--dim); }
+    .arg { color: var(--fg); }
+    .cmt { color: var(--dim); }
+    .out { margin: 0 0 1rem; max-width: 74ch; }
+    .lead { font-size: clamp(1.15rem, 2.6vw, 1.5rem); line-height: 1.5; color: var(--fg); font-weight: 500; }
+    .lead em { color: var(--amber); font-style: normal; }
+    .dim { color: var(--dim); }
+
+    details.proj { border-top: 1px dashed var(--line); }
+    details.proj:last-of-type { border-bottom: 1px dashed var(--line); }
+    details.proj > summary { list-style: none; cursor: pointer; padding: .95rem 0; display: grid; grid-template-columns: 1.1rem 6.5rem minmax(0, 1fr); gap: .1rem .6rem; align-items: baseline; }
+    details.proj > summary::-webkit-details-marker { display: none; }
+    .car::before { content: "▸"; color: var(--dim); }
+    details[open] .car::before { content: "▾"; color: var(--green); }
+    .pn { color: var(--cyan); font-weight: 700; }
+    .pf { color: var(--dim); font-size: .88rem; }
+    details[open] .pf { display: none; }
+    details.proj > summary:hover .pn { text-decoration: underline; text-underline-offset: 4px; }
+    .pbody { padding: .2rem 0 1.8rem 1.7rem; border-left: 1px dashed var(--line); margin-left: .35rem; padding-left: 1.3rem; }
+    .pbody .cmd { margin-top: .2rem; }
+    .lnk { display: flex; flex-wrap: wrap; gap: .3rem 1.4rem; margin: .5rem 0 1.2rem; font-size: .86rem; }
+    h4 { font-size: .82rem; font-weight: 700; margin: 1.3rem 0 .25rem; letter-spacing: .02em; }
+    h4.b { color: var(--purple); } h4.m { color: var(--green); } h4.l { color: var(--dim); }
+    .blk p { max-width: 74ch; }
+    .err { margin: 1.4rem 0; padding: .8rem 1rem .9rem; border-left: 3px solid var(--red); background: color-mix(in srgb, var(--red) 9%, transparent); max-width: 74ch; }
+    .err h4 { color: var(--red); margin: 0 0 .25rem; }
+    .pipe { display: flex; flex-wrap: wrap; gap: .15rem .5rem; margin: .4rem 0 .3rem; font-size: .82rem; color: var(--dim); }
+    .pipe span { color: var(--fg); }
+    .pipe span.hl { color: var(--amber); }
+    .pipe span:not(:last-child)::after { content: " |"; color: var(--dim); margin-left: .5rem; }
+    .cap { font-size: .76rem; color: var(--dim); margin-bottom: 1rem; }
+    .gal { display: grid; grid-template-columns: repeat(3, 1fr); gap: .6rem; margin: .5rem 0 .3rem; }
+    .gal img { width: 100%; height: auto; display: block; border: 1px solid var(--line); border-radius: 3px; }
+    .arr { color: var(--fg); font-size: .84rem; }
+    .arr b { color: var(--green); font-weight: 400; }
+
+    .kv { display: grid; grid-template-columns: 12rem minmax(0, 1fr); gap: .1rem 1.2rem; margin-bottom: .8rem; }
+    .kv dt { color: var(--purple); } .kv dd { color: var(--fg); }
+    .log { display: grid; grid-template-columns: 11.5rem minmax(0, 1fr); gap: 0 1.2rem; margin-bottom: 1.4rem; }
+    .log .d { color: var(--dim); font-size: .86rem; padding-top: .1rem; }
+    .log b { color: var(--cyan); font-weight: 700; } .log .o { color: var(--amber); }
+    .log ul { list-style: none; margin-top: .25rem; }
+    .log li::before { content: "- "; color: var(--dim); }
+    .log li { margin-bottom: .15rem; }
+    .also { display: grid; grid-template-columns: 8.5rem minmax(0, 1fr); gap: .1rem 1.2rem; padding: .7rem 0; border-top: 1px dashed var(--line); }
+    .also:last-of-type { border-bottom: 1px dashed var(--line); }
+    .also .k { color: var(--dim); font-size: .8rem; padding-top: .15rem; }
+    .also b { color: var(--cyan); }
+    .cur { display: inline-block; width: .6em; height: 1.05em; background: var(--green); vertical-align: -.17em; animation: blink 1.1s steps(2, start) infinite; }
+    @keyframes blink { to { visibility: hidden; } }
+    footer { color: var(--dim); font-size: .74rem; border-top: 1px solid var(--line); padding-top: 1.2rem; }
+
+    @media (max-width: 720px) {
+        .title { display: none; } .tabs { margin-left: auto; gap: .7rem; } .tabs a.x { display: none; }
+        details.proj > summary { grid-template-columns: 1.1rem minmax(0, 1fr); }
+        .pf { grid-column: 2; }
+        .pbody { padding-left: .9rem; }
+        .kv, .log, .also { grid-template-columns: 1fr; }
+        .kv dt, .log .d, .also .k { margin-top: .5rem; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .cur { animation: none; } * { transition: none !important; } }
+</style>
+</head>
+<body>
+<header class="bar">
+    <div class="bar-in">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="title">ahmad@siddiqui: ~/portfolio</span>
+        <nav class="tabs" aria-label="Sections">
+            <a href="#work">[1]work</a><a href="#experience" class="x">[2]log</a><a href="#skills" class="x">[3]skills</a><a href="#about" class="x">[4]about</a><a href="#contact">[5]contact</a>
+        </nav>
+        <button class="tbtn" id="themeToggle" type="button" aria-label="Switch colour theme"><span id="themeLabel">Light</span></button>
+    </div>
+</header>
+
+<main>
+    <section id="top" aria-label="Introduction">
+        <p class="cmd"><span class="ps">ahmad@siddiqui</span><span class="dol">:</span><span class="path">~</span><span class="dol">$</span> whoami</p>
+        <p class="out lead">I build and measure ML systems that run on small hardware: <em>local LLMs</em>, RAG that has to quote its sources, and on-device vision and speech.</p>
+        <p class="out dim"># BS Data Science, KFUEIT · ML Engineer (contract) at Rezinx since Aug 2025 · Rahim Yar Khan, Pakistan</p>
+        <p class="out">
+            <span class="dol">next →</span>
+            <a href="#work">cd projects/</a> &nbsp;·&nbsp; <a href="../data/Ahmad_Siddiqui_Resume.pdf" download>wget resume.pdf</a> &nbsp;·&nbsp; <a href="https://github.com/Copperhorse" target="_blank" rel="noopener">open github</a>
+        </p>
+    </section>
+
+    <section id="work">
+        <p class="cmd"><span class="ps">ahmad@siddiqui</span><span class="dol">:</span><span class="path">~</span><span class="dol">$</span> ls -1 projects/</p>
+        <p class="out dim"># four projects, each with what I measured and what did not work. Open one with enter.</p>
+        
+        <details class="proj" id="picturebook" open>
+            <summary><span class="car"></span><span class="pn">picturebook/</span><span class="pf">Three models take turns on one 8 GB GPU and turn a spoken story into an illustrated PDF in 6 to 9 minutes. Nothing leaves the laptop.</span></summary>
+            <div class="pbody">
+                <p class="cmd"><span class="dol">$</span> cat picturebook/README.md</p>
+                <p class="out"><strong>PictureBOOK</strong> <span class="dim">— an offline picture-book maker</span></p>
+                <p class="out">A parent types, imports or records a story and gets an illustrated PDF a few minutes later. The child&#39;s voice and the family&#39;s story stay on the machine.</p>
+                <div class="lnk"><a href="https://github.com/Copperhorse/PictureBOOK" target="_blank" rel="noopener">↗ code on github</a><a href="https://github.com/Copperhorse/PictureBOOK/tree/main/docs/research" target="_blank" rel="noopener">↗ research notes</a></div>
+
+                
+                <div class="pipe" aria-label="Pipeline"><span>Story in</span><span>Whisper</span><span>Plan (Gemma 4)</span><span class="hl">Parent approves characters</span><span>Draw (FLUX.2 klein)</span><span>Vision critic</span><span class="hl">Human review</span><span>PDF</span></div>
+                <p class="cap"># Pipeline. Highlighted steps are where a person decides.</p>
+                
+                
+                <div class="gal"><img src="../data/picturebook-1.webp" width="640" height="640" loading="lazy" alt="Illustration of a girl with long blonde hair tiptoeing into a wooden kitchen with three bowls of porridge on the table" /><img src="../data/picturebook-2.webp" width="640" height="640" loading="lazy" alt="Illustration of two bears and a small bear cub standing by a kitchen table with three bowls, looking upset" /><img src="../data/picturebook-3.webp" width="640" height="640" loading="lazy" alt="Illustration of a bear family in a wooden kitchen with bowls of porridge on the table" /></div>
+                <p class="cap"># Pages from a book generated on the 8 GB laptop GPU (Goldilocks and the Three Bears, crayon style).</p>
+                
+
+                <div class="blk"><h4 class="b"># built</h4><p>A Tauri 2 desktop app. A Rust core owns the book library; a Python FastAPI sidecar runs one GPU job at a time behind a per-launch bearer token and streams progress over SSE. <strong>Every model stage is its own process under a memory-capped systemd scope</strong>, so killing the app, even with SIGKILL, leaves no stray process and no VRAM in use (this is tested).</p></div>
+                <div class="blk"><h4 class="m"># measured</h4><p>Whisper large-v3-turbo: <strong>1.9% word error rate</strong> on 48 synthetic clips. Vision critic: <strong>94.7% accuracy and 99% recall</strong> of deliberate mismatches on 40 synthetic images. About 10 s per image and 6 to 9 minutes per book. 95 sidecar tests and 61 pipeline-rule tests pass, alongside a Rust test suite.</p></div>
+                <div class="err" role="note"><h4>[stderr] did not work</h4><p>No model I tried could find extra hands or legs (0 of 3). Redrawing a flagged page fixed only 2 of 13 defects; the other 11 came back in all three redraws. So the critic writes notes for the parent and never acts alone, and a human reviews every page. Silence also became a made-up book until I added a gate for it.</p></div>
+                <div class="blk"><h4 class="l"># limits</h4><p>Tested on one machine (Linux, RTX A2000), English only, and speech was tested on synthetic clips rather than real parents. Not packaged yet.</p></div>
+                <p class="cap" style="margin-top:1.2rem">stack = ["Tauri 2", "Rust", "SvelteKit", "TypeScript", "FastAPI", "llama.cpp", "Whisper", "FLUX.2 klein", "Gemma 4"]</p>
+            </div>
+        </details>
+        
+        <details class="proj" id="template-rag">
+            <summary><span class="car"></span><span class="pn">template-rag/</span><span class="pf">A RAG library for documents and code where an answer only counts if every quote is found word for word in the chunk it cites.</span></summary>
+            <div class="pbody">
+                <p class="cmd"><span class="dol">$</span> cat template-rag/README.md</p>
+                <p class="out"><strong>Template_RAG</strong> <span class="dim">— retrieval that has to show its evidence</span></p>
+                <p class="out">Most RAG demos cannot tell you when they are wrong. This one only returns an answer if every quote can be found, word for word, in the chunk it cites.</p>
+                <div class="lnk"><a href="https://github.com/Copperhorse/Template_RAG" target="_blank" rel="noopener">↗ code on github</a><a href="https://github.com/Copperhorse/Template_RAG/tree/main/evals/results" target="_blank" rel="noopener">↗ eval results</a></div>
+
+                
+                <div class="pipe" aria-label="Pipeline"><span>Ingest</span><span>Chunk (Markdown / AST)</span><span class="hl">Quality gate</span><span>Dense + BM25</span><span>RRF</span><span>Rerank</span><span class="hl">Quote gates</span></div>
+                <p class="cap"># Pipeline. Highlighted steps reject weak input or unsupported answers.</p>
+                
+                
+
+                <div class="blk"><h4 class="b"># built</h4><p>Hybrid retrieval (EmbeddingGemma plus SQLite FTS5 BM25, fused with reciprocal rank fusion) and a listwise reranker. Python is chunked along its AST. Ingest-time gates keep tables of contents, licence headers and generated code out of the index, and answer gates locate each quote in its source chunk and store the chunk's exact text. A Streamlit UI shows every stage's rank. It started from the ingestion and verification code of QuestionPrep, generalised into a reusable library.</p></div>
+                <div class="blk"><h4 class="m"># measured</h4><p>Frozen corpus and gold sets, with bootstrap confidence intervals and paired significance tests. The reranker added <strong>+18.6 recall@1</strong> on 70 hand-written queries and <strong>+25.5</strong> on 149 synthetic ones. <strong>513 tests</strong> and CI.</p></div>
+                <div class="err" role="note"><h4>[stderr] did not work</h4><p>A web-trained cross-encoder (ms-marco) never helped, and letting it replace the ranking lost 14 points of recall@5 on code, so it votes alongside dense and BM25 instead. The best reranker is non-commercial (CC-BY-NC); the README says so and names a permissive fallback.</p></div>
+                
+                <p class="cap" style="margin-top:1.2rem">stack = ["Python", "SQLite FTS5", "sentence-transformers", "Streamlit", "pytest", "GitHub Actions"]</p>
+            </div>
+        </details>
+        
+        <details class="proj" id="dlrag">
+            <summary><span class="car"></span><span class="pn">dlrag/</span><span class="pf">Retrieval took a 2B model from 3.3% to 33.3% of runs passing every test. Agent tools added nothing detectable.</span></summary>
+            <div class="pbody">
+                <p class="cmd"><span class="dol">$</span> cat dlrag/README.md</p>
+                <p class="out"><strong>DLRAG</strong> <span class="dim">— does a tool-using agent beat plain RAG for a small model?</span></p>
+                <p class="out">A 2B model writes PyTorch code from a textbook and its repository. Is it better to paste retrieved passages into the prompt once, or to let the model call search tools?</p>
+                <div class="lnk"><a href="https://github.com/Copperhorse/DLRAG" target="_blank" rel="noopener">↗ code on github</a><a href="https://github.com/Copperhorse/DLRAG/blob/main/REPORT.md" target="_blank" rel="noopener">↗ full report</a></div>
+
+                
+                
+
+                <div class="blk"><h4 class="b"># built</h4><p>56 execution-graded tasks: 32 for tuning and 24 frozen for the final test, with a sha256 manifest checked before analysis. Six arms on one model, settings tuned on the dev tasks and the test run once, paired bootstrap intervals, and a parity check that proves each pair of arms gets an identical first message.</p></div>
+                <div class="blk"><h4 class="m"># measured</h4><p><strong>Retrieval is what matters:</strong> 3.3% of runs passed every test with nothing, 33.3% with passages plus a repository map. <strong>Tools added nothing detectable</strong> (−1.7 points, 95% CI −10.8 to +6.7) at about 3× the tokens. A 4B model was not measurably better than the 2B. The repository map cut import failures from 34.2% to 9.2%.</p></div>
+                <div class="err" role="note"><h4>[stderr] did not work</h4><p>The original question, whether a small model plus retrieval can replace a much bigger one, was not tested: the largest model was 4B. The report says so. A fine-tuning arm was shelved because its training data was templated prompts nobody would ask.</p></div>
+                
+                <p class="cap" style="margin-top:1.2rem">stack = ["Python", "uv workspace", "llama.cpp", "Agno", "BM25 + dense (fastembed)", "Docling"]</p>
+            </div>
+        </details>
+        
+        <details class="proj" id="questionprep">
+            <summary><span class="car"></span><span class="pn">questionprep/</span><span class="pf">Upload a PDF, a local LLM writes the questions, and answers are scored in three stages. Stress detection runs in the browser. My final-year project.</span></summary>
+            <div class="pbody">
+                <p class="cmd"><span class="dol">$</span> cat questionprep/README.md</p>
+                <p class="out"><strong>QuestionPrep</strong> <span class="dim">— interview practice from your own documents</span></p>
+                <p class="out">Upload a PDF, a local LLM writes interview questions with reference answers, and you answer by typing or speaking. Everything runs on your own machine.</p>
+                <div class="lnk"><a href="https://github.com/Copperhorse/QuestionPrep" target="_blank" rel="noopener">↗ code on github</a></div>
+
+                
+                <div class="pipe" aria-label="Pipeline"><span>PDF</span><span>Docling</span><span>Chunks</span><span>LLM questions</span><span class="hl">Verification gates</span><span>Interview</span><span class="hl">3-stage scoring</span></div>
+                <p class="cap"># Pipeline. Highlighted steps check generated questions and score answers.</p>
+                
+                
+
+                <div class="blk"><h4 class="b"># built</h4><p>FastAPI, SQLite and ChromaDB with a llama.cpp server. Answers are scored in three stages (fuzzy match, then a BGE bi-encoder, then a DeBERTa NLI cross-encoder), with a guard for cut-off answers and a cap when the answer contradicts the reference. Difficulty adapts to a running average of the score. <strong>Stress detection runs in the browser</strong>: a TCN on ONNX Runtime Web with a hand-written DSP front end (FFT, mel filterbank, DCT-II). Also token auth, single-use SSE tickets and upload validation.</p></div>
+                <div class="blk"><h4 class="m"># measured</h4><p><strong>460 tests</strong> (plus 42 GPU and LLM tests run separately), CI, and a gold set used to tune the question-verification checks.</p></div>
+                <div class="err" role="note"><h4>[stderr] did not work</h4><p>The scoring has known weaknesses that I documented instead of hiding: an answer cut off mid-sentence can still score 0.8 to 1.0, and a correct answer in different terminology scores about 0.28. The stress detector also produced false positives on stutters.</p></div>
+                
+                <p class="cap" style="margin-top:1.2rem">stack = ["FastAPI", "SQLite", "ChromaDB", "llama.cpp", "sentence-transformers", "ONNX Runtime Web", "JavaScript"]</p>
+            </div>
+        </details>
+        
+
+        <p class="cmd" style="margin-top:2.2rem"><span class="dol">$</span> ls also-built/</p>
+        
+        <div class="also"><div class="k">NLP · LoRA</div><div><b>Hybrid profanity detection and rewriting</b><br />A LoRA-tuned DistilBERT classifier (95.67% accuracy) routes flagged reviews to a QLoRA-tuned LFM2.5-1.2B rewriter, switching adapters on one base model. <a href="https://github.com/Copperhorse/profanity_distilbert_lora" target="_blank" rel="noopener">↗ github</a></div></div>
+        
+        <div class="also"><div class="k">RAG · Legal NLP</div><div><b>PocketLaw</b><br />A retrieval-augmented chatbot over Pakistani banking law, using dense retrieval and a LoRA fine-tuned LLM. <a href="https://github.com/Copperhorse/PocketLaw" target="_blank" rel="noopener">↗ github</a></div></div>
+        
+        <div class="also"><div class="k">Computer vision</div><div><b>Currency classifier for the visually impaired</b><br />EfficientNet-B0 transfer learning for Pakistani banknotes, with a confidence gate so ambiguous frames are never spoken aloud. <a href="https://github.com/Copperhorse/CurrencyClassification" target="_blank" rel="noopener">↗ github</a></div></div>
+        
+        <div class="also"><div class="k">Machine learning · Security</div><div><b>Edge-IIoT attack detection</b><br />Multi-class network intrusion classifier (random forest and XGBoost) reaching 94.67% accuracy with class-imbalance handling. <a href="https://github.com/Copperhorse/edge_iiot" target="_blank" rel="noopener">↗ github</a></div></div>
+        
+    </section>
+
+    <section id="experience">
+        <p class="cmd"><span class="ps">ahmad@siddiqui</span><span class="dol">:</span><span class="path">~</span><span class="dol">$</span> cat experience.log</p>
+        
+        <div class="log">
+            <div class="d">Aug 2025 – present<br />Remote</div>
+            <div><b>ML Engineer (contract)</b> <span class="o">@ Rezinx</span>
+                <ul><li>Fine-tuned language models with LoRA for downstream production use cases.</li><li>Built a recommendation engine with Superlinked.</li><li>Evaluated several embedding models for a job-classification task.</li><li>Built a computer-vision hazard detector for fire, knives and stairs that estimates how close each one is to a child.</li><li>Built a Grafana dashboard for monitoring models and systems.</li></ul></div>
+        </div>
+        
+        <div class="log">
+            <div class="d">May – Jun 2025<br />Remote</div>
+            <div><b>Machine Learning Intern</b> <span class="o">@ Arch Technologies</span>
+                <ul><li>Built machine learning models to find patterns in large datasets.</li><li>Prepared data and engineered features to improve model accuracy.</li><li>Ran experiments to evaluate models and recommended adjustments.</li></ul></div>
+        </div>
+        
+        <div class="log">
+            <div class="d">Jun – Jul 2026<br />Lahore</div>
+            <div><b>Intern</b> <span class="o">@ Ittehad Chemicals</span>
+                <ul><li>Supported production and inventory processes while following plant safety protocols.</li></ul></div>
+        </div>
+        
+    </section>
+
+    <section id="skills">
+        <p class="cmd"><span class="ps">ahmad@siddiqui</span><span class="dol">:</span><span class="path">~</span><span class="dol">$</span> cat skills.yml</p>
+        <dl class="kv">
+            <dt>ml_and_deep_learning:</dt><dd>Python, SQL, PyTorch, scikit-learn, XGBoost, Hugging Face Transformers, LoRA and QLoRA fine-tuning, ONNX Runtime, llama.cpp</dd><dt>nlp_and_retrieval:</dt><dd>RAG, hybrid search (BM25 + dense), reranking, embeddings, ChromaDB, NLI, Docling, evaluation (recall@k, MRR, bootstrap confidence intervals)</dd><dt>vision_and_speech:</dt><dd>YOLOv8 / YOLO11, EfficientNet, ByteTrack, OpenCV, TCN, Whisper</dd><dt>backend_and_tooling:</dt><dd>FastAPI, REST APIs, SSE, SQLite, Polars, DuckDB, Docker, Grafana, Superlinked, Git, pytest, GitHub Actions, Linux, uv</dd>
+        </dl>
+    </section>
+
+    <section id="about">
+        <p class="cmd"><span class="ps">ahmad@siddiqui</span><span class="dol">:</span><span class="path">~</span><span class="dol">$</span> cat about.md</p>
+        <p class="out">I like ML work where the interesting part is finding out what actually works. My projects report what failed next to what succeeded, because that is the part another engineer needs.</p><p class="out"><strong>Education:</strong> BS Data Science, Khwaja Fareed University of Engineering and Information Technology (KFUEIT), 2022 – 2026, CGPA 3.35 / 4.00.</p><p class="out">Away from a keyboard I read mythology and work through logic puzzles.</p>
+    </section>
+
+    <section id="contact">
+        <p class="cmd"><span class="ps">ahmad@siddiqui</span><span class="dol">:</span><span class="path">~</span><span class="dol">$</span> ./contact.sh</p>
+        <p class="arr"><b>email    </b> → <a href="mailto:ahmadsiddiqui6127@gmail.com">ahmadsiddiqui6127@gmail.com</a></p>
+        <p class="arr"><b>github   </b> → <a href="https://github.com/Copperhorse" target="_blank" rel="noopener">github.com/Copperhorse</a></p>
+        <p class="arr"><b>linkedin </b> → <a href="https://www.linkedin.com/in/ahmad-siddiqui-559998267" target="_blank" rel="noopener">linkedin.com/in/ahmad-siddiqui-559998267</a></p>
+        <p class="arr"><b>resume   </b> → <a href="../data/Ahmad_Siddiqui_Resume.pdf" download>Ahmad_Siddiqui_Resume.pdf</a></p>
+        <p class="cmd" style="margin-top:1.6rem"><span class="ps">ahmad@siddiqui</span><span class="dol">:</span><span class="path">~</span><span class="dol">$</span> <span class="cur" aria-hidden="true"></span></p>
+    </section>
+
+    <footer>exit 0 · M. Ahmad Siddiqui · updated October 2026</footer>
+</main>
+<script>
+    (function () {
+        var root = document.documentElement;
+        var btn = document.getElementById("themeToggle");
+        var label = document.getElementById("themeLabel");
+        function paint() {
+            if (label) label.textContent = root.getAttribute("data-theme") === "dark" ? "Light" : "Dark";
+        }
+        if (btn) {
+            btn.addEventListener("click", function () {
+                var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+                root.setAttribute("data-theme", next);
+                try { localStorage.setItem("theme", next); } catch (e) {}
+                paint();
+            });
+        }
+        paint();
+    })();
+</script>
+<script>
+    /* Visitor analytics: loads only where Vercel serves the page and Web Analytics is enabled. */
+    (function () {
+        var h = location.hostname;
+        if (h.endsWith("github.io") || h === "localhost" || h === "127.0.0.1" || location.protocol === "file:") return;
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        var s = document.createElement("script");
+        s.defer = true;
+        s.src = "/_vercel/insights/script.js";
+        document.head.appendChild(s);
+    })();
+</script>
+<script>
+    (function () {
+        function openHash() { var el = location.hash && document.querySelector("details" + location.hash); if (el) el.open = true; }
+        openHash(); window.addEventListener("hashchange", openHash);
+        var tabs = {}; document.querySelectorAll(".tabs a").forEach(function (a) { tabs[a.getAttribute("href").slice(1)] = a; });
+        function setActive(id) {
+            if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) id = "contact";
+            Object.keys(tabs).forEach(function (k) { if (k === id) tabs[k].setAttribute("aria-current", "true"); else tabs[k].removeAttribute("aria-current"); });
+        }
+        if ("IntersectionObserver" in window) {
+            var io = new IntersectionObserver(function (es) { es.forEach(function (e) { if (e.isIntersecting) setActive(e.target.id); }); }, { rootMargin: "-30% 0px -60% 0px" });
+            ["work", "experience", "skills", "about", "contact"].forEach(function (k) { var s = document.getElementById(k); if (s) io.observe(s); });
+            addEventListener("scroll", function () { if (innerHeight + scrollY >= document.documentElement.scrollHeight - 4) setActive("contact"); }, { passive: true });
+        }
+    })();
+</script>
+</body>
+</html>

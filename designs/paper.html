@@ -1,0 +1,1253 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>M. Ahmad Siddiqui | ML Engineer</title>
+        <meta
+            name="description"
+            content="M. Ahmad Siddiqui, ML engineer. Local LLMs, RAG that quotes its sources, and on-device vision and speech, with measured results."
+        />
+        <meta name="theme-color" content="#f7f4ee" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="M. Ahmad Siddiqui | ML Engineer" />
+        <meta
+            property="og:description"
+            content="ML systems that run on small hardware, with measured results: PictureBOOK, Template_RAG, DLRAG, QuestionPrep."
+        />
+        <meta property="og:image" content="../data/picturebook-1.webp" />
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "Person",
+                "name": "M. Ahmad Siddiqui",
+                "jobTitle": "ML Engineer",
+                "email": "mailto:ahmadsiddiqui6127@gmail.com",
+                "sameAs": [
+                    "https://github.com/Copperhorse",
+                    "https://www.linkedin.com/in/ahmad-siddiqui-559998267"
+                ]
+            }
+        </script>
+        <script>
+            /* Set the theme before first paint: saved choice, else the system setting (light if neither). */
+            (function () {
+                var t = "light";
+                try {
+                    var s = localStorage.getItem("theme");
+                    if (s === "light" || s === "dark") t = s;
+                    else if (window.matchMedia("(prefers-color-scheme: dark)").matches) t = "dark";
+                } catch (e) {}
+                document.documentElement.setAttribute("data-theme", t);
+            })();
+        </script>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Newsreader:ital,opsz,wght@0,6..72,400..700;1,6..72,400..600&display=swap"
+            rel="stylesheet"
+        />
+        <style>
+            :root {
+                /* Paper (default) */
+                --bg: #f7f4ee;
+                --bg-alt: #efebe2;
+                --ink: #1b1b1a;
+                --ink-2: #4a4944;
+                --ink-3: #6b6a63;
+                --rule: #d9d4c7;
+                --rule-strong: #1b1b1a;
+                --accent: #2540c8;
+                --accent-tint: rgba(37, 64, 200, 0.07);
+                --serif: "Newsreader", Georgia, "Times New Roman", serif;
+                --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+            }
+            [data-theme="dark"] {
+                --bg: #121315;
+                --bg-alt: #191a1d;
+                --ink: #ecebe6;
+                --ink-2: #b9b8b1;
+                --ink-3: #8e8d86;
+                --rule: #2a2b2f;
+                --rule-strong: #ecebe6;
+                --accent: #9db1ff;
+                --accent-tint: rgba(157, 177, 255, 0.09);
+            }
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                margin: 0;
+                padding: 0;
+            }
+            html {
+                scroll-behavior: smooth;
+                scroll-padding-top: 1.5rem;
+            }
+            body {
+                background: var(--bg);
+                color: var(--ink);
+                font-family: var(--serif);
+                font-size: 1.0625rem;
+                line-height: 1.65;
+                font-optical-sizing: auto;
+                transition: background-color 0.25s ease, color 0.25s ease;
+            }
+            a {
+                color: inherit;
+            }
+            :focus-visible {
+                outline: 2px solid var(--accent);
+                outline-offset: 3px;
+                border-radius: 2px;
+            }
+            .skip {
+                position: absolute;
+                left: -999px;
+                top: 0.5rem;
+                background: var(--ink);
+                color: var(--bg);
+                padding: 0.5rem 0.9rem;
+                font-family: var(--mono);
+                font-size: 0.8rem;
+                z-index: 2000;
+            }
+            .skip:focus {
+                left: 0.5rem;
+            }
+            .label {
+                font-family: var(--mono);
+                font-size: 0.72rem;
+                font-weight: 500;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+            }
+
+            /* ---------- shell: sticky rail + content ---------- */
+            .shell {
+                max-width: 1160px;
+                margin: 0 auto;
+                display: grid;
+                grid-template-columns: 290px minmax(0, 1fr);
+                gap: 0 4.5rem;
+                padding: 0 1.75rem;
+            }
+            .rail {
+                position: sticky;
+                top: 0;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                padding: 3rem 0 2rem;
+            }
+            .avatar {
+                width: 76px;
+                height: 76px;
+                border-radius: 50%;
+                object-fit: cover;
+                border: 1px solid var(--rule);
+                margin-bottom: 1.4rem;
+            }
+            .rail h1 {
+                font-size: 1.9rem;
+                font-weight: 600;
+                line-height: 1.1;
+                letter-spacing: -0.02em;
+                margin-bottom: 0.4rem;
+            }
+            .rail .role {
+                font-size: 1rem;
+                color: var(--ink-2);
+                font-style: italic;
+                margin-bottom: 2.4rem;
+            }
+            .rail nav ul {
+                list-style: none;
+            }
+            .rail nav a {
+                display: flex;
+                gap: 0.9rem;
+                padding: 0.4rem 0;
+                text-decoration: none;
+                font-family: var(--mono);
+                font-size: 0.78rem;
+                letter-spacing: 0.04em;
+                color: var(--ink-3);
+                transition: color 0.15s;
+            }
+            .rail nav a span {
+                opacity: 0.6;
+            }
+            .rail nav a:hover,
+            .rail nav a[aria-current="true"] {
+                color: var(--ink);
+            }
+            .rail nav a[aria-current="true"]::before {
+                content: "";
+                width: 1.4rem;
+                height: 1px;
+                background: var(--accent);
+                align-self: center;
+                margin-right: -0.4rem;
+            }
+            .rail-links {
+                margin-top: auto;
+                display: flex;
+                flex-direction: column;
+                gap: 0.35rem;
+                font-family: var(--mono);
+                font-size: 0.76rem;
+            }
+            .rail-links a {
+                color: var(--ink-2);
+                text-decoration: none;
+                width: fit-content;
+                border-bottom: 1px solid var(--rule);
+            }
+            .rail-links a:hover {
+                color: var(--accent);
+                border-bottom-color: var(--accent);
+            }
+            .theme-toggle {
+                margin-top: 1.2rem;
+                width: fit-content;
+                background: none;
+                border: 1px solid var(--rule);
+                color: var(--ink-3);
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                padding: 0.3rem 0.65rem;
+                cursor: pointer;
+            }
+            .theme-toggle:hover {
+                color: var(--ink);
+                border-color: var(--ink-3);
+            }
+
+            /* ---------- content ---------- */
+            main {
+                padding: 3rem 0 2rem;
+                min-width: 0;
+            }
+            section {
+                padding-bottom: 4.5rem;
+            }
+            .lead {
+                font-size: clamp(1.55rem, 3vw, 2.2rem);
+                line-height: 1.3;
+                letter-spacing: -0.015em;
+                font-weight: 500;
+                max-width: 26em;
+                margin-bottom: 1.1rem;
+            }
+            .lead em {
+                color: var(--accent);
+                font-style: italic;
+            }
+            .where {
+                font-family: var(--mono);
+                font-size: 0.76rem;
+                color: var(--ink-3);
+                margin-bottom: 4rem;
+            }
+            h2.sec {
+                display: flex;
+                align-items: baseline;
+                gap: 1rem;
+                font-family: var(--mono);
+                font-size: 0.74rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+                padding-bottom: 0.7rem;
+                border-bottom: 1px solid var(--rule-strong);
+                margin-bottom: 0.4rem;
+            }
+            h2.sec::after {
+                content: "";
+            }
+            .intro {
+                color: var(--ink-2);
+                max-width: 38em;
+                margin: 1rem 0 1.6rem;
+            }
+
+            /* ---------- project index ---------- */
+            details.proj {
+                border-bottom: 1px solid var(--rule);
+            }
+            details.proj > summary {
+                list-style: none;
+                cursor: pointer;
+                display: grid;
+                grid-template-columns: 2.6rem minmax(0, 1fr) 1.4rem;
+                gap: 0.4rem 0.6rem;
+                align-items: start;
+                padding: 1.5rem 0;
+            }
+            details.proj > summary::-webkit-details-marker {
+                display: none;
+            }
+            .n {
+                font-family: var(--mono);
+                font-size: 0.74rem;
+                color: var(--ink-3);
+                padding-top: 0.55rem;
+            }
+            .t b {
+                display: block;
+                font-size: clamp(1.35rem, 2.6vw, 1.7rem);
+                font-weight: 600;
+                line-height: 1.2;
+                letter-spacing: -0.015em;
+            }
+            .t b i {
+                font-weight: 400;
+                color: var(--ink-2);
+            }
+            .t .find {
+                display: block;
+                color: var(--ink-2);
+                margin-top: 0.35rem;
+                max-width: 40em;
+            }
+            .pm {
+                position: relative;
+                width: 1rem;
+                height: 1rem;
+                margin-top: 0.6rem;
+                justify-self: end;
+            }
+            .pm::before,
+            .pm::after {
+                content: "";
+                position: absolute;
+                background: var(--ink-3);
+                left: 0;
+                top: 50%;
+                width: 100%;
+                height: 1.5px;
+                transition: transform 0.2s;
+            }
+            .pm::after {
+                transform: rotate(90deg);
+            }
+            details[open] .pm::after {
+                transform: rotate(0deg);
+            }
+            details.proj > summary:hover .t b {
+                color: var(--accent);
+            }
+            details.proj > summary:hover .pm::before,
+            details.proj > summary:hover .pm::after {
+                background: var(--accent);
+            }
+            details[open] .t .find {
+                display: none;
+            }
+            .body {
+                padding: 0 0 2.4rem 3.2rem;
+            }
+            .body > p.problem {
+                font-size: 1.1rem;
+                color: var(--ink);
+                max-width: 40em;
+            }
+            .links {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 1.2rem;
+                margin: 0.9rem 0 1.6rem;
+                font-family: var(--mono);
+                font-size: 0.76rem;
+            }
+            .links a {
+                color: var(--accent);
+                text-decoration: none;
+                border-bottom: 1px solid transparent;
+            }
+            .links a:hover {
+                border-bottom-color: var(--accent);
+            }
+            figure {
+                margin: 0 0 1.6rem;
+            }
+            figcaption {
+                font-family: var(--mono);
+                font-size: 0.68rem;
+                letter-spacing: 0.04em;
+                color: var(--ink-3);
+                margin-top: 0.55rem;
+            }
+            ol.steps {
+                list-style: none;
+                display: flex;
+                flex-wrap: wrap;
+                counter-reset: s;
+                border-top: 1px solid var(--rule);
+                border-bottom: 1px solid var(--rule);
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                color: var(--ink-2);
+            }
+            ol.steps li {
+                counter-increment: s;
+                padding: 0.55rem 0.9rem 0.55rem 0;
+                margin-right: 0.9rem;
+            }
+            ol.steps li::before {
+                content: counter(s) " ";
+                color: var(--ink-3);
+            }
+            ol.steps li.hl {
+                color: var(--ink);
+                box-shadow: inset 0 -2px 0 var(--accent);
+            }
+            .gallery {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: 0.7rem;
+            }
+            .gallery img {
+                width: 100%;
+                height: auto;
+                display: block;
+                background: var(--bg-alt);
+            }
+            .part {
+                margin-bottom: 1.3rem;
+                max-width: 42em;
+            }
+            .part h4 {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--ink-3);
+                margin-bottom: 0.3rem;
+            }
+            .part p {
+                color: var(--ink-2);
+            }
+            .part strong {
+                color: var(--ink);
+                font-weight: 600;
+            }
+            aside.fail {
+                max-width: 42em;
+                margin: 1.6rem 0;
+                padding: 1rem 1.3rem 1.1rem;
+                border-left: 3px solid var(--accent);
+                background: var(--accent-tint);
+            }
+            aside.fail h4 {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                font-weight: 500;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--accent);
+                margin-bottom: 0.3rem;
+            }
+            aside.fail p {
+                font-style: italic;
+                color: var(--ink);
+            }
+            p.stack {
+                font-family: var(--mono);
+                font-size: 0.72rem;
+                color: var(--ink-3);
+                line-height: 1.7;
+            }
+
+            /* ---------- also built / experience / skills ---------- */
+            .rows {
+                border-top: 1px solid var(--rule-strong);
+            }
+            .row {
+                display: grid;
+                grid-template-columns: 13rem minmax(0, 1fr);
+                gap: 1.5rem;
+                padding: 1.1rem 0;
+                border-bottom: 1px solid var(--rule);
+            }
+            .row .k {
+                font-family: var(--mono);
+                font-size: 0.74rem;
+                color: var(--ink-3);
+                line-height: 1.6;
+                padding-top: 0.2rem;
+            }
+            .row h3 {
+                font-size: 1.1rem;
+                font-weight: 600;
+                line-height: 1.3;
+            }
+            .row .sub {
+                color: var(--ink-3);
+                font-style: italic;
+                margin-bottom: 0.4rem;
+            }
+            .row p,
+            .row li {
+                color: var(--ink-2);
+                font-size: 1rem;
+            }
+            .row ul {
+                margin-left: 1.1rem;
+            }
+            .row li {
+                margin-bottom: 0.25rem;
+            }
+            .row a.go {
+                font-family: var(--mono);
+                font-size: 0.72rem;
+                color: var(--accent);
+                text-decoration: none;
+            }
+            .row a.go:hover {
+                text-decoration: underline;
+            }
+            .about p {
+                color: var(--ink-2);
+                max-width: 38em;
+                margin-bottom: 0.9rem;
+            }
+            .about strong {
+                color: var(--ink);
+                font-weight: 600;
+            }
+            .contact a {
+                text-decoration: none;
+                border-bottom: 1px solid var(--rule);
+            }
+            .contact a:hover {
+                color: var(--accent);
+                border-bottom-color: var(--accent);
+            }
+            footer {
+                font-family: var(--mono);
+                font-size: 0.7rem;
+                color: var(--ink-3);
+                padding: 1.5rem 0 0;
+                border-top: 1px solid var(--rule);
+            }
+
+            /* ---------- narrow screens: the rail becomes a header ---------- */
+            @media (max-width: 900px) {
+                .shell {
+                    display: block;
+                    padding: 0 1.25rem;
+                }
+                .rail {
+                    position: static;
+                    height: auto;
+                    padding: 1.6rem 0 0;
+                }
+                .rail .role {
+                    margin-bottom: 1.2rem;
+                }
+                .rail nav ul {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 0 1.2rem;
+                }
+                .rail nav a[aria-current="true"]::before {
+                    display: none;
+                }
+                .rail-links {
+                    margin-top: 1rem;
+                    flex-direction: row;
+                    flex-wrap: wrap;
+                    gap: 0.4rem 1.2rem;
+                }
+                .theme-toggle {
+                    margin-top: 0.9rem;
+                }
+                main {
+                    padding-top: 2.5rem;
+                }
+                .where {
+                    margin-bottom: 3rem;
+                }
+                .body {
+                    padding-left: 0;
+                }
+                .row {
+                    grid-template-columns: 1fr;
+                    gap: 0.2rem;
+                }
+                details.proj > summary {
+                    grid-template-columns: 2rem minmax(0, 1fr) 1.2rem;
+                }
+            }
+            @media (max-width: 520px) {
+                .gallery {
+                    gap: 0.4rem;
+                }
+            }
+            @media (prefers-reduced-motion: reduce) {
+                html {
+                    scroll-behavior: auto;
+                }
+                * {
+                    transition: none !important;
+                }
+            }
+        </style>
+    </head>
+    <body>
+        <a class="skip" href="#work">Skip to projects</a>
+
+        <div class="shell">
+            <aside class="rail">
+                <img
+                    class="avatar"
+                    src="../data/profile.webp"
+                    width="480"
+                    height="480"
+                    alt="Portrait of M. Ahmad Siddiqui"
+                />
+                <h1>M. Ahmad Siddiqui</h1>
+                <p class="role">Machine learning engineer</p>
+                <nav aria-label="Sections">
+                    <ul>
+                        <li><a href="#work"><span>01</span>Work</a></li>
+                        <li><a href="#experience"><span>02</span>Experience</a></li>
+                        <li><a href="#skills"><span>03</span>Skills</a></li>
+                        <li><a href="#about"><span>04</span>About</a></li>
+                        <li><a href="#contact"><span>05</span>Contact</a></li>
+                    </ul>
+                </nav>
+                <div class="rail-links">
+                    <a href="../data/Ahmad_Siddiqui_Resume.pdf" download>Resume (PDF) ↓</a>
+                    <a href="https://github.com/Copperhorse" target="_blank" rel="noopener">GitHub ↗</a>
+                    <a href="https://www.linkedin.com/in/ahmad-siddiqui-559998267" target="_blank" rel="noopener"
+                        >LinkedIn ↗</a
+                    >
+                    <a href="mailto:ahmadsiddiqui6127@gmail.com">Email ↗</a>
+                </div>
+                <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme">
+                    <span id="themeLabel">Dark</span>
+                </button>
+            </aside>
+
+            <main>
+                <!-- ================= INTRO ================= -->
+                <section id="top" aria-label="Introduction">
+                    <p class="lead">
+                        I build and measure ML systems that run on small hardware: <em>local LLMs</em>, RAG that has to
+                        quote its sources, and on-device vision and speech.
+                    </p>
+                    <p class="where">
+                        BS Data Science, KFUEIT · ML Engineer (contract) at Rezinx since Aug 2025 · Rahim Yar Khan,
+                        Pakistan
+                    </p>
+                </section>
+
+                <!-- ================= WORK ================= -->
+                <section id="work">
+                    <h2 class="sec"><span>01</span>Work</h2>
+                    <p class="intro">
+                        Four projects, each with what it solves, what I built, what I measured and what did not work.
+                        Open one to read it; every repository has its own README with the full detail.
+                    </p>
+
+                    <!-- ---------- PictureBOOK ---------- -->
+                    <details class="proj" id="picturebook" open>
+                        <summary>
+                            <span class="n">01</span>
+                            <span class="t">
+                                <b>PictureBOOK <i>an offline picture-book maker</i></b>
+                                <span class="find"
+                                    >Three models take turns on one 8 GB GPU and turn a spoken story into an illustrated
+                                    PDF in 6 to 9 minutes. Nothing leaves the laptop.</span
+                                >
+                            </span>
+                            <span class="pm" aria-hidden="true"></span>
+                        </summary>
+                        <div class="body">
+                            <p class="problem">
+                                A parent types, imports or records a story and gets an illustrated PDF a few minutes
+                                later. The child's voice and the family's story stay on the machine.
+                            </p>
+                            <div class="links">
+                                <a href="https://github.com/Copperhorse/PictureBOOK" target="_blank" rel="noopener"
+                                    >Code on GitHub ↗</a
+                                >
+                                <a
+                                    href="https://github.com/Copperhorse/PictureBOOK/tree/main/docs/research"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Research notes ↗</a
+                                >
+                            </div>
+                            <figure>
+                                <ol class="steps">
+                                    <li>Story in</li>
+                                    <li>Whisper</li>
+                                    <li>Plan (Gemma 4)</li>
+                                    <li class="hl">Parent approves characters</li>
+                                    <li>Draw (FLUX.2 klein)</li>
+                                    <li>Vision critic</li>
+                                    <li class="hl">Human review</li>
+                                    <li>PDF</li>
+                                </ol>
+                                <figcaption>Pipeline. Highlighted steps are where a person decides.</figcaption>
+                            </figure>
+                            <figure>
+                                <div class="gallery">
+                                    <img
+                                        src="../data/picturebook-1.webp"
+                                        width="640"
+                                        height="640"
+                                        loading="lazy"
+                                        alt="Illustration of a girl with long blonde hair tiptoeing into a wooden kitchen with three bowls of porridge on the table"
+                                    />
+                                    <img
+                                        src="../data/picturebook-2.webp"
+                                        width="640"
+                                        height="640"
+                                        loading="lazy"
+                                        alt="Illustration of two bears and a small bear cub standing by a kitchen table with three bowls, looking upset"
+                                    />
+                                    <img
+                                        src="../data/picturebook-3.webp"
+                                        width="640"
+                                        height="640"
+                                        loading="lazy"
+                                        alt="Illustration of a bear family in a wooden kitchen with bowls of porridge on the table"
+                                    />
+                                </div>
+                                <figcaption>
+                                    Pages from a book generated on the 8 GB laptop GPU (Goldilocks and the Three Bears,
+                                    crayon style).
+                                </figcaption>
+                            </figure>
+                            <div class="part">
+                                <h4>Built</h4>
+                                <p>
+                                    A Tauri 2 desktop app. A Rust core owns the book library; a Python FastAPI sidecar
+                                    runs one GPU job at a time behind a per-launch bearer token and streams progress over
+                                    SSE.
+                                    <strong>Every model stage is its own process under a memory-capped systemd scope</strong>,
+                                    so killing the app, even with SIGKILL, leaves no stray process and no VRAM in use
+                                    (this is tested).
+                                </p>
+                            </div>
+                            <div class="part">
+                                <h4>Measured</h4>
+                                <p>
+                                    Whisper large-v3-turbo: <strong>1.9% word error rate</strong> on 48 synthetic clips.
+                                    Vision critic: <strong>94.7% accuracy and 99% recall</strong> of deliberate
+                                    mismatches on 40 synthetic images. About 10 s per image and 6 to 9 minutes per book.
+                                    95 sidecar tests and 61 pipeline-rule tests pass, alongside a Rust test suite.
+                                </p>
+                            </div>
+                            <aside class="fail">
+                                <h4>Did not work</h4>
+                                <p>
+                                    No model I tried could find extra hands or legs (0 of 3). Redrawing a flagged page
+                                    fixed only 2 of 13 defects; the other 11 came back in all three redraws. So the
+                                    critic writes notes for the parent and never acts alone, and a human reviews every
+                                    page. Silence also became a made-up book until I added a gate for it.
+                                </p>
+                            </aside>
+                            <div class="part">
+                                <h4>Limits</h4>
+                                <p>
+                                    Tested on one machine (Linux, RTX A2000), English only, and speech was tested on
+                                    synthetic clips rather than real parents. Not packaged yet.
+                                </p>
+                            </div>
+                            <p class="stack">
+                                Tauri 2 · Rust · SvelteKit · TypeScript · FastAPI · llama.cpp · Whisper · FLUX.2 klein ·
+                                Gemma 4
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- ---------- Template_RAG ---------- -->
+                    <details class="proj" id="template-rag">
+                        <summary>
+                            <span class="n">02</span>
+                            <span class="t">
+                                <b>Template_RAG <i>retrieval that has to show its evidence</i></b>
+                                <span class="find"
+                                    >A RAG library for documents and code where an answer only counts if every quote is
+                                    found word for word in the chunk it cites.</span
+                                >
+                            </span>
+                            <span class="pm" aria-hidden="true"></span>
+                        </summary>
+                        <div class="body">
+                            <p class="problem">
+                                Most RAG demos cannot tell you when they are wrong. This one only returns an answer if
+                                every quote can be found, word for word, in the chunk it cites.
+                            </p>
+                            <div class="links">
+                                <a href="https://github.com/Copperhorse/Template_RAG" target="_blank" rel="noopener"
+                                    >Code on GitHub ↗</a
+                                >
+                                <a
+                                    href="https://github.com/Copperhorse/Template_RAG/tree/main/evals/results"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Eval results ↗</a
+                                >
+                            </div>
+                            <figure>
+                                <ol class="steps">
+                                    <li>Ingest</li>
+                                    <li>Chunk (Markdown / AST)</li>
+                                    <li class="hl">Quality gate</li>
+                                    <li>Dense + BM25</li>
+                                    <li>RRF</li>
+                                    <li>Rerank</li>
+                                    <li class="hl">Quote gates</li>
+                                </ol>
+                                <figcaption>Pipeline. Highlighted steps reject weak input or unsupported answers.</figcaption>
+                            </figure>
+                            <div class="part">
+                                <h4>Built</h4>
+                                <p>
+                                    Hybrid retrieval (EmbeddingGemma plus SQLite FTS5 BM25, fused with reciprocal rank
+                                    fusion) and a listwise reranker. Python is chunked along its AST. Ingest-time gates
+                                    keep tables of contents, licence headers and generated code out of the index, and
+                                    answer gates locate each quote in its source chunk and store the chunk's exact text.
+                                    A Streamlit UI shows every stage's rank. It started from the ingestion and
+                                    verification code of QuestionPrep, generalised into a reusable library.
+                                </p>
+                            </div>
+                            <div class="part">
+                                <h4>Measured</h4>
+                                <p>
+                                    Frozen corpus and gold sets, with bootstrap confidence intervals and paired
+                                    significance tests. The reranker added <strong>+18.6 recall@1</strong> on 70
+                                    hand-written queries and <strong>+25.5</strong> on 149 synthetic ones.
+                                    <strong>513 tests</strong> and CI.
+                                </p>
+                            </div>
+                            <aside class="fail">
+                                <h4>Did not work</h4>
+                                <p>
+                                    A web-trained cross-encoder (ms-marco) never helped, and letting it replace the
+                                    ranking lost 14 points of recall@5 on code, so it votes alongside dense and BM25
+                                    instead. The best reranker is non-commercial (CC-BY-NC); the README says so and names
+                                    a permissive fallback.
+                                </p>
+                            </aside>
+                            <p class="stack">
+                                Python · SQLite FTS5 · sentence-transformers · Streamlit · pytest · GitHub Actions
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- ---------- DLRAG ---------- -->
+                    <details class="proj" id="dlrag">
+                        <summary>
+                            <span class="n">03</span>
+                            <span class="t">
+                                <b>DLRAG <i>does a tool-using agent beat plain RAG for a small model?</i></b>
+                                <span class="find"
+                                    >Retrieval took a 2B model from 3.3% to 33.3% of runs passing every test. Agent tools
+                                    added nothing detectable.</span
+                                >
+                            </span>
+                            <span class="pm" aria-hidden="true"></span>
+                        </summary>
+                        <div class="body">
+                            <p class="problem">
+                                A 2B model writes PyTorch code from a textbook and its repository. Is it better to paste
+                                retrieved passages into the prompt once, or to let the model call search tools?
+                            </p>
+                            <div class="links">
+                                <a href="https://github.com/Copperhorse/DLRAG" target="_blank" rel="noopener"
+                                    >Code on GitHub ↗</a
+                                >
+                                <a
+                                    href="https://github.com/Copperhorse/DLRAG/blob/main/REPORT.md"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >Full report ↗</a
+                                >
+                            </div>
+                            <div class="part">
+                                <h4>Built</h4>
+                                <p>
+                                    56 execution-graded tasks: 32 for tuning and 24 frozen for the final test, with a
+                                    sha256 manifest checked before analysis. Six arms on one model, settings tuned on the
+                                    dev tasks and the test run once, paired bootstrap intervals, and a parity check that
+                                    proves each pair of arms gets an identical first message.
+                                </p>
+                            </div>
+                            <div class="part">
+                                <h4>Measured</h4>
+                                <p>
+                                    <strong>Retrieval is what matters:</strong> 3.3% of runs passed every test with
+                                    nothing, 33.3% with passages plus a repository map.
+                                    <strong>Tools added nothing detectable</strong> (−1.7 points, 95% CI −10.8 to +6.7)
+                                    at about 3× the tokens. A 4B model was not measurably better than the 2B. The
+                                    repository map cut import failures from 34.2% to 9.2%.
+                                </p>
+                            </div>
+                            <aside class="fail">
+                                <h4>Did not work</h4>
+                                <p>
+                                    The original question, whether a small model plus retrieval can replace a much bigger
+                                    one, was not tested: the largest model was 4B. The report says so. A fine-tuning arm
+                                    was shelved because its training data was templated prompts nobody would ask.
+                                </p>
+                            </aside>
+                            <p class="stack">
+                                Python · uv workspace · llama.cpp · Agno · BM25 + dense (fastembed) · Docling
+                            </p>
+                        </div>
+                    </details>
+
+                    <!-- ---------- QuestionPrep ---------- -->
+                    <details class="proj" id="questionprep">
+                        <summary>
+                            <span class="n">04</span>
+                            <span class="t">
+                                <b>QuestionPrep <i>interview practice from your own documents</i></b>
+                                <span class="find"
+                                    >Upload a PDF, a local LLM writes the questions, and answers are scored in three
+                                    stages. Stress detection runs in the browser. My final-year project.</span
+                                >
+                            </span>
+                            <span class="pm" aria-hidden="true"></span>
+                        </summary>
+                        <div class="body">
+                            <p class="problem">
+                                Upload a PDF, a local LLM writes interview questions with reference answers, and you
+                                answer by typing or speaking. Everything runs on your own machine.
+                            </p>
+                            <div class="links">
+                                <a href="https://github.com/Copperhorse/QuestionPrep" target="_blank" rel="noopener"
+                                    >Code on GitHub ↗</a
+                                >
+                            </div>
+                            <figure>
+                                <ol class="steps">
+                                    <li>PDF</li>
+                                    <li>Docling</li>
+                                    <li>Chunks</li>
+                                    <li>LLM questions</li>
+                                    <li class="hl">Verification gates</li>
+                                    <li>Interview</li>
+                                    <li class="hl">3-stage scoring</li>
+                                </ol>
+                                <figcaption>Pipeline. Highlighted steps check generated questions and score answers.</figcaption>
+                            </figure>
+                            <div class="part">
+                                <h4>Built</h4>
+                                <p>
+                                    FastAPI, SQLite and ChromaDB with a llama.cpp server. Answers are scored in three
+                                    stages (fuzzy match, then a BGE bi-encoder, then a DeBERTa NLI cross-encoder), with a
+                                    guard for cut-off answers and a cap when the answer contradicts the reference.
+                                    Difficulty adapts to a running average of the score.
+                                    <strong>Stress detection runs in the browser</strong>: a TCN on ONNX Runtime Web with
+                                    a hand-written DSP front end (FFT, mel filterbank, DCT-II). Also token auth,
+                                    single-use SSE tickets and upload validation.
+                                </p>
+                            </div>
+                            <div class="part">
+                                <h4>Measured</h4>
+                                <p>
+                                    <strong>460 tests</strong> (plus 42 GPU and LLM tests run separately), CI, and a gold
+                                    set used to tune the question-verification checks.
+                                </p>
+                            </div>
+                            <aside class="fail">
+                                <h4>Did not work</h4>
+                                <p>
+                                    The scoring has known weaknesses that I documented instead of hiding: an answer cut
+                                    off mid-sentence can still score 0.8 to 1.0, and a correct answer in different
+                                    terminology scores about 0.28. The stress detector also produced false positives on
+                                    stutters.
+                                </p>
+                            </aside>
+                            <p class="stack">
+                                FastAPI · SQLite · ChromaDB · llama.cpp · sentence-transformers · ONNX Runtime Web ·
+                                JavaScript
+                            </p>
+                        </div>
+                    </details>
+
+                    <h3 class="label" style="margin: 3rem 0 0.7rem">Also built</h3>
+                    <div class="rows">
+                        <div class="row">
+                            <div class="k">NLP · LoRA</div>
+                            <div>
+                                <h3>Hybrid profanity detection and rewriting</h3>
+                                <p>
+                                    A LoRA-tuned DistilBERT classifier (95.67% accuracy) routes flagged reviews to a
+                                    QLoRA-tuned LFM2.5-1.2B rewriter, switching adapters on one base model.
+                                    <a
+                                        class="go"
+                                        href="https://github.com/Copperhorse/profanity_distilbert_lora"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >GitHub ↗</a
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="k">RAG · Legal NLP</div>
+                            <div>
+                                <h3>PocketLaw</h3>
+                                <p>
+                                    A retrieval-augmented chatbot over Pakistani banking law, using dense retrieval and a
+                                    LoRA fine-tuned LLM.
+                                    <a class="go" href="https://github.com/Copperhorse/PocketLaw" target="_blank" rel="noopener"
+                                        >GitHub ↗</a
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="k">Computer vision</div>
+                            <div>
+                                <h3>Currency classifier for the visually impaired</h3>
+                                <p>
+                                    EfficientNet-B0 transfer learning for Pakistani banknotes, with a confidence gate so
+                                    ambiguous frames are never spoken aloud.
+                                    <a
+                                        class="go"
+                                        href="https://github.com/Copperhorse/CurrencyClassification"
+                                        target="_blank"
+                                        rel="noopener"
+                                        >GitHub ↗</a
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="k">Machine learning · Security</div>
+                            <div>
+                                <h3>Edge-IIoT attack detection</h3>
+                                <p>
+                                    Multi-class network intrusion classifier (random forest and XGBoost) reaching 94.67%
+                                    accuracy with class-imbalance handling.
+                                    <a class="go" href="https://github.com/Copperhorse/edge_iiot" target="_blank" rel="noopener"
+                                        >GitHub ↗</a
+                                    >
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= EXPERIENCE ================= -->
+                <section id="experience">
+                    <h2 class="sec"><span>02</span>Experience</h2>
+                    <div class="rows">
+                        <div class="row">
+                            <div class="k">Aug 2025 – present<br />Remote</div>
+                            <div>
+                                <h3>ML Engineer (contract), Rezinx</h3>
+                                <ul>
+                                    <li>Fine-tuned language models with LoRA for downstream production use cases.</li>
+                                    <li>Built a recommendation engine with Superlinked.</li>
+                                    <li>Evaluated several embedding models for a job-classification task.</li>
+                                    <li>
+                                        Built a computer-vision hazard detector for fire, knives and stairs that
+                                        estimates how close each one is to a child.
+                                    </li>
+                                    <li>Built a Grafana dashboard for monitoring models and systems.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="k">May – Jun 2025<br />Remote</div>
+                            <div>
+                                <h3>Machine Learning Intern, Arch Technologies</h3>
+                                <ul>
+                                    <li>Built machine learning models to find patterns in large datasets.</li>
+                                    <li>Prepared data and engineered features to improve model accuracy.</li>
+                                    <li>Ran experiments to evaluate models and recommended adjustments.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="k">Jun – Jul 2026<br />Lahore</div>
+                            <div>
+                                <h3>Intern, Ittehad Chemicals</h3>
+                                <ul>
+                                    <li>
+                                        Supported production and inventory processes while following plant safety
+                                        protocols.
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= SKILLS ================= -->
+                <section id="skills">
+                    <h2 class="sec"><span>03</span>Skills</h2>
+                    <div class="rows">
+                        <div class="row">
+                            <div class="k">ML and deep learning</div>
+                            <p>
+                                Python, SQL, PyTorch, scikit-learn, XGBoost, Hugging Face Transformers, LoRA and QLoRA
+                                fine-tuning, ONNX Runtime, llama.cpp
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="k">NLP and retrieval</div>
+                            <p>
+                                RAG, hybrid search (BM25 + dense), reranking, embeddings, ChromaDB, NLI, Docling,
+                                evaluation (recall@k, MRR, bootstrap confidence intervals)
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="k">Vision and speech</div>
+                            <p>YOLOv8 / YOLO11, EfficientNet, ByteTrack, OpenCV, TCN, Whisper</p>
+                        </div>
+                        <div class="row">
+                            <div class="k">Backend and tooling</div>
+                            <p>
+                                FastAPI, REST APIs, SSE, SQLite, Polars, DuckDB, Docker, Grafana, Superlinked, Git,
+                                pytest, GitHub Actions, Linux, uv
+                            </p>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ================= ABOUT ================= -->
+                <section id="about" class="about">
+                    <h2 class="sec"><span>04</span>About</h2>
+                    <p style="margin-top: 1.2rem">
+                        I like ML work where the interesting part is finding out what actually works. My projects report
+                        what failed next to what succeeded, because that is the part another engineer needs.
+                    </p>
+                    <p>
+                        <strong>Education:</strong> BS Data Science, Khwaja Fareed University of Engineering and
+                        Information Technology (KFUEIT), 2022 – 2026, CGPA 3.35 / 4.00.
+                    </p>
+                    <p>Away from a keyboard I read mythology and work through logic puzzles.</p>
+                </section>
+
+                <!-- ================= CONTACT ================= -->
+                <section id="contact" class="contact">
+                    <h2 class="sec"><span>05</span>Contact</h2>
+                    <p style="margin: 1.2rem 0 1.2rem; color: var(--ink-2)">The quickest way to reach me is email.</p>
+                    <div class="rows">
+                        <div class="row">
+                            <div class="k">Email</div>
+                            <p><a href="mailto:ahmadsiddiqui6127@gmail.com">ahmadsiddiqui6127@gmail.com</a></p>
+                        </div>
+                        <div class="row">
+                            <div class="k">GitHub</div>
+                            <p>
+                                <a href="https://github.com/Copperhorse" target="_blank" rel="noopener"
+                                    >github.com/Copperhorse</a
+                                >
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="k">LinkedIn</div>
+                            <p>
+                                <a
+                                    href="https://www.linkedin.com/in/ahmad-siddiqui-559998267"
+                                    target="_blank"
+                                    rel="noopener"
+                                    >linkedin.com/in/ahmad-siddiqui-559998267</a
+                                >
+                            </p>
+                        </div>
+                        <div class="row">
+                            <div class="k">Resume</div>
+                            <p><a href="../data/Ahmad_Siddiqui_Resume.pdf" download>Download as PDF</a></p>
+                        </div>
+                    </div>
+                </section>
+
+                <footer>M. Ahmad Siddiqui · ML Engineer · Updated October 2026</footer>
+            </main>
+        </div>
+
+        <script>
+            (function () {
+                var root = document.documentElement;
+                var label = document.getElementById("themeLabel");
+                function paint() {
+                    label.textContent = root.getAttribute("data-theme") === "dark" ? "Light" : "Dark";
+                }
+                document.getElementById("themeToggle").addEventListener("click", function () {
+                    var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+                    root.setAttribute("data-theme", next);
+                    try {
+                        localStorage.setItem("theme", next);
+                    } catch (e) {}
+                    paint();
+                });
+                paint();
+
+                /* Open the project a link points to (e.g. /#dlrag). */
+                function openFromHash() {
+                    var el = location.hash && document.querySelector("details" + location.hash);
+                    if (el) el.open = true;
+                }
+                openFromHash();
+                window.addEventListener("hashchange", openFromHash);
+
+                /* Highlight the rail link of the section in view. */
+                var links = {};
+                document.querySelectorAll(".rail nav a").forEach(function (a) {
+                    links[a.getAttribute("href").slice(1)] = a;
+                });
+                function setActive(id) {
+                    var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4;
+                    if (atBottom) id = "contact"; /* Contact is too short to reach the trigger zone */
+                    Object.keys(links).forEach(function (k) {
+                        if (k === id) links[k].setAttribute("aria-current", "true");
+                        else links[k].removeAttribute("aria-current");
+                    });
+                }
+                if ("IntersectionObserver" in window) {
+                    var io = new IntersectionObserver(
+                        function (entries) {
+                            entries.forEach(function (e) {
+                                if (e.isIntersecting) setActive(e.target.id);
+                            });
+                        },
+                        { rootMargin: "-30% 0px -60% 0px" }
+                    );
+                    Object.keys(links).forEach(function (k) {
+                        var s = document.getElementById(k);
+                        if (s) io.observe(s);
+                    });
+                    window.addEventListener(
+                        "scroll",
+                        function () {
+                            if (window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 4) setActive("contact");
+                        },
+                        { passive: true }
+                    );
+                }
+            })();
+        </script>
+
+        <!-- Visitor analytics: loads only where Vercel serves the page and Web Analytics is enabled. -->
+        <script>
+            (function () {
+                if (location.hostname.endsWith("github.io") || location.hostname === "localhost" || location.hostname === "127.0.0.1") return;
+                window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+                var s = document.createElement("script");
+                s.defer = true;
+                s.src = "/_vercel/insights/script.js";
+                document.head.appendChild(s);
+            })();
+        </script>
+    </body>
+</html>

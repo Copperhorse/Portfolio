@@ -1,0 +1,31 @@
+<script>
+    (function () {
+        var root = document.documentElement;
+        var btn = document.getElementById("themeToggle");
+        var label = document.getElementById("themeLabel");
+        function paint() {
+            if (label) label.textContent = root.getAttribute("data-theme") === "dark" ? "Light" : "Dark";
+        }
+        if (btn) {
+            btn.addEventListener("click", function () {
+                var next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+                root.setAttribute("data-theme", next);
+                try { localStorage.setItem("theme", next); } catch (e) {}
+                paint();
+            });
+        }
+        paint();
+    })();
+</script>
+<script>
+    /* Visitor analytics: loads only where Vercel serves the page and Web Analytics is enabled. */
+    (function () {
+        var h = location.hostname;
+        if (h.endsWith("github.io") || h === "localhost" || h === "127.0.0.1" || location.protocol === "file:") return;
+        window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        var s = document.createElement("script");
+        s.defer = true;
+        s.src = "/_vercel/insights/script.js";
+        document.head.appendChild(s);
+    })();
+</script>

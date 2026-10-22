@@ -1,0 +1,173 @@
+\documentclass[letterpaper,11pt]{article}
+
+\usepackage{latexsym}
+\usepackage[empty]{fullpage}
+\usepackage{titlesec}
+\usepackage{marvosym}
+\usepackage[usenames,dvipsnames]{color}
+\usepackage{verbatim}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\usepackage{fancyhdr}
+\usepackage[english]{babel}
+\usepackage{tabularx}
+\input{glyphtounicode}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyfoot{}
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\addtolength{\oddsidemargin}{-0.5in}
+\addtolength{\evensidemargin}{-0.5in}
+\addtolength{\textwidth}{1in}
+\addtolength{\topmargin}{-.6in}
+\addtolength{\textheight}{1.3in}
+
+\urlstyle{same}
+\raggedbottom
+\raggedright
+\setlength{\tabcolsep}{0in}
+
+\titleformat{\section}{
+  \vspace{-7pt}\scshape\raggedright\large
+}{}{0em}{}[\color{black}\titlerule \vspace{-6pt}]
+
+\pdfgentounicode=1
+
+\newcommand{\resumeItem}[1]{
+  \item\small{
+    {#1 \vspace{-2pt}}
+  }
+}
+
+\newcommand{\resumeSubheading}[4]{
+  \vspace{-2pt}\item
+    \begin{tabular*}{0.97\textwidth}[t]{l@{\extracolsep{\fill}}r}
+      \textbf{#1} & #2 \\
+      \textit{\small#3} & \textit{\small #4} \\
+    \end{tabular*}\vspace{-7pt}
+}
+
+\newcommand{\resumeProjectHeading}[2]{
+    \item
+    \begin{tabular*}{0.97\textwidth}{l@{\extracolsep{\fill}}r}
+      \small#1 & #2 \\
+    \end{tabular*}\vspace{-9pt}
+}
+
+\newcommand{\resumeSubHeadingListStart}{\begin{itemize}[leftmargin=0.15in, label={}]}
+\newcommand{\resumeSubHeadingListEnd}{\end{itemize}}
+\newcommand{\resumeItemListStart}{\begin{itemize}}
+\newcommand{\resumeItemListEnd}{\end{itemize}\vspace{-8pt}}
+
+\begin{document}
+
+%----------HEADING----------
+\begin{center}
+    \textbf{\Huge \scshape M. Ahmad Siddiqui} \\ \vspace{1pt}
+    \small Rahim Yar Khan, Punjab, Pakistan
+    $|$ +92-3141706233
+    $|$ \href{mailto:ahmadsiddiqui6127@gmail.com}{\underline{ahmadsiddiqui6127@gmail.com}} \\
+    \href{https://www.linkedin.com/in/ahmad-siddiqui-559998267/}{\underline{linkedin.com/in/ahmad-siddiqui-559998267}}
+    $|$ \href{https://github.com/Copperhorse}{\underline{github.com/Copperhorse}}
+    $|$ \href{https://copperhorse.github.io/Portfolio/}{\underline{copperhorse.github.io/Portfolio}}
+\end{center}
+
+%-----------SUMMARY-----------
+\section{Professional Summary}
+\vspace{2pt}
+\small{ML engineer (BS Data Science) who builds and evaluates LLM, RAG, speech and computer-vision systems that run on local hardware. Experience fine-tuning models with LoRA and QLoRA, building retrieval pipelines that verify their own answers, and deploying on-device inference with ONNX Runtime and llama.cpp. Reports results with held-out test sets, confidence intervals and documented failures.}
+
+%-----------EXPERIENCE-----------
+\section{Experience}
+  \resumeSubHeadingListStart
+
+    \resumeSubheading
+      {Rezinx}{Remote}
+      {ML Engineer (contract)}{Aug 2025 -- Present}
+      \resumeItemListStart
+        \resumeItem{Fine-tuned language models with LoRA for downstream production use cases.}
+        \resumeItem{Built a recommendation engine with Superlinked and evaluated several embedding models for a job-classification task.}
+        \resumeItem{Built a computer-vision hazard detector for fire, knives and stairs that estimates how close each one is to a child.}
+        \resumeItem{Built a Grafana dashboard for monitoring models and systems.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Arch Technologies}{Islamabad, Pakistan (Remote)}
+      {Machine Learning Intern}{May 2025 -- Jun 2025}
+      \resumeItemListStart
+        \resumeItem{Built machine learning models to find patterns in large datasets, with data preprocessing and feature engineering to improve accuracy.}
+        \resumeItem{Ran experiments to evaluate model effectiveness and recommended adjustments.}
+      \resumeItemListEnd
+
+    \resumeSubheading
+      {Ittehad Chemicals}{Lahore, Punjab, Pakistan}
+      {Intern}{Jun 2026 -- Jul 2026}
+      \resumeItemListStart
+        \resumeItem{Supported production and inventory processes while following plant safety protocols.}
+      \resumeItemListEnd
+
+  \resumeSubHeadingListEnd
+
+%-----------PROJECTS-----------
+\section{Projects}
+    \resumeSubHeadingListStart
+
+      \resumeProjectHeading
+        {\textbf{\href{https://github.com/Copperhorse/PictureBOOK}{PictureBOOK: offline picture-book generator}}}{\textit{\small Rust, Tauri, SvelteKit, FastAPI}}
+        \resumeItemListStart
+          \resumeItem{Built a desktop app that turns a typed or spoken story into an illustrated PDF in 6 to 9 minutes, running Whisper, Gemma 4 E4B and FLUX.2 klein in turn on one 8 GB GPU. Each model stage is an isolated, memory-capped process (tested: no stray process after SIGKILL).}
+          \resumeItem{Benchmarked every stage (Whisper 1.9\% WER on 48 synthetic clips; vision critic 94.7\% accuracy on 40 synthetic images) and documented failures: no model detected extra limbs and 11 of 13 flagged defects survived redraws, so a human reviews every page. 156 Python tests.}
+        \resumeItemListEnd
+
+      \resumeProjectHeading
+        {\textbf{\href{https://github.com/Copperhorse/Template_RAG}{Template\_RAG: RAG library for documents and source code}}}{\textit{\small Python, SQLite FTS5, Streamlit}}
+        \resumeItemListStart
+          \resumeItem{Built hybrid retrieval (dense + BM25 + reciprocal rank fusion + listwise reranker), AST-based code chunking, and answer gates that require every quote to be found verbatim in the chunk it cites. 513 tests and CI.}
+          \resumeItem{Evaluated on frozen gold sets with bootstrap confidence intervals and paired tests: the reranker added +18.6 recall@1 on 70 hand-written queries, while a web-trained cross-encoder never helped.}
+        \resumeItemListEnd
+
+      \resumeProjectHeading
+        {\textbf{\href{https://github.com/Copperhorse/DLRAG}{DLRAG: pre-registered comparison of RAG and tool-using agents}}}{\textit{\small Python, llama.cpp}}
+        \resumeItemListStart
+          \resumeItem{Designed 56 execution-graded coding tasks (24 frozen for the final test, sha256 manifest) and compared six retrieval and agent setups on a 2B model with paired bootstrap confidence intervals.}
+          \resumeItem{Found that retrieval raised the full-pass rate from 3.3\% to 33.3\%, while tool-using agents added no detectable gain ($-$1.7 points, 95\% CI $-$10.8 to +6.7) at about $3\times$ the tokens.}
+        \resumeItemListEnd
+
+      \resumeProjectHeading
+        {\textbf{\href{https://github.com/Copperhorse/QuestionPrep}{QuestionPrep: AI interview practice platform (final-year project)}}}{\textit{\small FastAPI, ChromaDB, llama.cpp}}
+        \resumeItemListStart
+          \resumeItem{Built a local platform that generates interview questions from PDFs with grounding checks and scores answers in three stages (fuzzy match, BGE bi-encoder, DeBERTa NLI), with adaptive difficulty, token auth and SSE. 460 tests and CI.}
+          \resumeItem{Implemented in-browser stress detection: a TCN on ONNX Runtime Web with a hand-written FFT, mel-filterbank and DCT-II front end, with no server round-trip.}
+        \resumeItemListEnd
+
+      \resumeProjectHeading
+        {\textbf{Other projects}}{}
+        \resumeItemListStart
+          \resumeItem{\href{https://github.com/Copperhorse/profanity_distilbert_lora}{Hybrid profanity detection and rewriting}: LoRA-tuned DistilBERT (95.67\% accuracy) routing to a QLoRA-tuned LFM2.5-1.2B rewriter via adapter switching. \href{https://github.com/Copperhorse/edge_iiot}{Edge-IIoT attack detection}: multi-class intrusion classifier, 94.67\% accuracy. \href{https://github.com/Copperhorse/PocketLaw}{PocketLaw}: RAG chatbot over Pakistani banking law. \href{https://github.com/Copperhorse/CurrencyClassification}{Currency classifier}: EfficientNet-B0 with text-to-speech for visually impaired users.}
+        \resumeItemListEnd
+
+    \resumeSubHeadingListEnd
+
+%-----------EDUCATION-----------
+\section{Education}
+  \resumeSubHeadingListStart
+    \resumeSubheading
+      {Khwaja Fareed University of Engineering and Information Technology}{Aug 2022 -- May 2026}
+      {Bachelor of Science in Data Science  $|$ CGPA: 3.35/4.00}{}
+  \resumeSubHeadingListEnd
+
+%-----------SKILLS-----------
+\section{Skills}
+ \begin{itemize}[leftmargin=0.15in, label={}]
+    \small{\item{
+     \textbf{ML \& Deep Learning}{: Python, SQL, PyTorch, scikit-learn, XGBoost, Hugging Face Transformers, LoRA, QLoRA, LLM fine-tuning, ONNX Runtime, llama.cpp} \\
+     \textbf{NLP \& Retrieval}{: RAG, hybrid search (BM25 + dense), reranking, embeddings, ChromaDB, NLI, Docling, evaluation (recall@k, MRR, bootstrap confidence intervals)} \\
+     \textbf{Vision \& Speech}{: YOLOv8, EfficientNet, transfer learning, object detection, OpenCV, Whisper} \\
+     \textbf{Backend \& Tools}{: FastAPI, REST APIs, SQLite, Docker, Grafana, Superlinked, Git, pytest, GitHub Actions, Linux, Bash, uv} \\
+    }}
+ \end{itemize}
+
+\end{document}
