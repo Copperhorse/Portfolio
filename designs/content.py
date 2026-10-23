@@ -115,7 +115,7 @@ PROJECTS = [
         "hl_label": "check",
         "gallery": [],
         "gallery_caption": "",
-        "built": "FastAPI, SQLite and ChromaDB with a llama.cpp server. Answers are scored in three stages (fuzzy match, then a BGE bi-encoder, then a DeBERTa NLI cross-encoder), with a guard for cut-off answers and a cap when the answer contradicts the reference. Difficulty adapts to a running average of the score. <strong>Stress detection runs in the browser</strong>: a TCN on ONNX Runtime Web with a hand-written DSP front end (FFT, mel filterbank, DCT-II). Also token auth, single-use SSE tickets and upload validation.",
+        "built": "FastAPI, SQLite and ChromaDB with a llama.cpp server. Answers are scored in three stages (fuzzy match, then a BGE bi-encoder, then a DeBERTa NLI cross-encoder), with a guard for cut-off answers and a cap when the answer contradicts the reference. Difficulty adapts to a running average of the score. <strong>Stress detection runs in the browser</strong>: a TCN on ONNX Runtime Web with a hand-written DSP front end (FFT, mel filterbank, log scaling). Also token auth, single-use SSE tickets and upload validation.",
         "measured": "<strong>460 tests</strong> (plus 42 GPU and LLM tests run separately), CI, and a gold set used to tune the question-verification checks.",
         "fail": "The scoring has known weaknesses that I documented instead of hiding: an answer cut off mid-sentence can still score 0.8 to 1.0, and a correct answer in different terminology scores about 0.28. The stress detector also produced false positives on stutters.",
         "limits": "",
