@@ -125,7 +125,7 @@ PROJECTS = [
 
 ALSO = [
     {"kind": "NLP · LoRA", "name": "Hybrid profanity detection and rewriting",
-     "text": "A LoRA-tuned DistilBERT classifier (95.67% accuracy) routes flagged reviews to a QLoRA-tuned LFM2.5-1.2B rewriter, switching adapters on one base model.",
+     "text": "A LoRA-tuned DistilBERT classifier (95.67% accuracy) labelled the synthetic training data for a QLoRA-tuned LFM2.5-1.2B, which classifies reviews and then switches its adapter off to rewrite the profane ones.",
      "url": "https://github.com/Copperhorse/profanity_distilbert_lora"},
     {"kind": "RAG · Legal NLP", "name": "PocketLaw",
      "text": "A retrieval-augmented chatbot over Pakistani banking law, using dense retrieval and a LoRA fine-tuned LLM.",
